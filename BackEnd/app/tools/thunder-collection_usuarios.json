@@ -1,0 +1,83 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "usuarios",
+    "collectionId": "49271606-69e8-485b-bfa6-645ccb162f96",
+    "dateExported": "2024-05-04T02:44:45.617Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "800e5398-4de5-408f-bf43-ff13e2d745c7",
+            "colId": "49271606-69e8-485b-bfa6-645ccb162f96",
+            "containerId": "",
+            "name": "getUser",
+            "url": "http://localhost:666/api/usuario/1",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-05-04T02:39:08.747Z",
+            "modified": "2024-05-04T02:39:45.994Z",
+            "headers": []
+        },
+        {
+            "_id": "2c931bfa-91ae-437f-ab3e-df2589aeb331",
+            "colId": "49271606-69e8-485b-bfa6-645ccb162f96",
+            "containerId": "",
+            "name": "getUserList",
+            "url": "http://localhost:666/api/usuario",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-05-04T02:39:35.538Z",
+            "modified": "2024-05-04T02:39:48.762Z",
+            "headers": []
+        },
+        {
+            "_id": "39e3978e-027e-4257-b1e3-c5de17cecb94",
+            "colId": "49271606-69e8-485b-bfa6-645ccb162f96",
+            "containerId": "",
+            "name": "postUser",
+            "url": "",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-05-04T02:40:01.149Z",
+            "modified": "2024-05-04T02:40:06.905Z",
+            "headers": []
+        },
+        {
+            "_id": "ad15a560-8c96-4dcf-b7e1-50227fbc29c3",
+            "colId": "49271606-69e8-485b-bfa6-645ccb162f96",
+            "containerId": "",
+            "name": "putUser",
+            "url": "",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-05-04T02:41:37.070Z",
+            "modified": "2024-05-04T02:41:40.634Z",
+            "headers": []
+        },
+        {
+            "_id": "5f0aa2c4-b7d9-45f6-bc3a-d02ef4f094fe",
+            "colId": "49271606-69e8-485b-bfa6-645ccb162f96",
+            "containerId": "",
+            "name": "deleteUser",
+            "url": "",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2024-05-04T02:42:41.358Z",
+            "modified": "2024-05-04T02:42:46.421Z",
+            "headers": []
+        },
+        {
+            "_id": "3a5133fd-3618-4f11-a4d1-aef788e044e5",
+            "colId": "49271606-69e8-485b-bfa6-645ccb162f96",
+            "containerId": "",
+            "name": "loginUser",
+            "url": "",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2024-05-04T02:43:18.915Z",
+            "modified": "2024-05-04T02:43:26.362Z",
+            "headers": []
+        }
+    ],
+    "ref": "bbIHuiQ6tbX253j9abzCJwNGeHlkbvXvmBRNXh1vDdQ-VNvSOploKvK9ZSNMvycCeQO13MR9mPnly95v4_0geA"
+}
