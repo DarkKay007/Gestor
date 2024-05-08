@@ -1,4 +1,4 @@
-import { Link } from "../Links";
+import { Link } from "./components/Links";
 
 export default function Page404() {
     return (

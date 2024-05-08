@@ -1,24 +1,20 @@
 import React from 'react';
-import { Link } from '../Links';
+import DashboardNav from './components/dashboard-nav';
 import '../styles/dashboard.css'
 const Dashboard = () => {
     return (
         <div className="dashboard">
-            <header>
+            <header className='dashboard-header'>
                 <h1>Kuro</h1>
             </header>
-            <nav>
-                <div>
-                    <button><Link to="/dashboard/UserList">Lista de Usuarios</Link></button>
-                    <button><Link to="/search">Buscar</Link></button>
-                </div>
+            <nav className='dashboard-nav'>
+                <DashboardNav />
             </nav>
-            <main>
-               
+            <main className='dashboard-main'>
+                <h2>Bienvenido al Dashboard</h2>
+                <img src="https://www.creativefabrica.com/wp-content/uploads/2021/09/29/Dashboard-Charts-Graphics-18046690-1-1-580x387.jpg" alt="" width={500}/>
+                <p>Selecciona una opción del menú de navegación para comenzar.</p>
             </main>
-            <footer>
-                <p>© 2024 Tu Compañía. Todos los derechos reservados.</p>
-            </footer>
         </div>
     );
 }

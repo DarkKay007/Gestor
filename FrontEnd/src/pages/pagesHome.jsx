@@ -1,15 +1,16 @@
-import  {Link} from '../Links'
+import { Link } from "./components/Links"
 export default function HomePage () {
     return(
-      <>
+    <>
         <div className="presentation-page">
             <header>
                 <h1>Bienvenido a nuestra página</h1>
                 <nav>
                     <ul>
-                       <li><Link to={'/about'}>Acerca De Nosotros</Link></li>
-                       <Link to="/login">Sing-In</Link>
-                        {/* Agrega más elementos de navegación según sea necesario */}
+                    <li><Link to={'/about'}>Acerca De Nosotros</Link></li>
+                    <li></li>    <Link to="/login">Sing-In</Link>
+                    <li><Link to={"/dashboard"}>dashboard</Link></li>
+                    
                     </ul>
                 </nav>
             </header>
@@ -20,10 +21,7 @@ export default function HomePage () {
                 </section>
                 {/* Agrega más secciones según sea necesario */}
             </main>
-            <footer>
-                <p>Derechos de autor &copy; 2024 - Todos los derechos reservados</p>
-            </footer>
         </div>
-      </>
+</>
     )
-  }
+}
