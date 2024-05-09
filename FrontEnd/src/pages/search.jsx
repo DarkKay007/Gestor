@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
-import { Link } from '../Links';
+import React, { useState } from "react";
+import { Link } from "./components/Links";
+import DashboardNav from "./components/dashboard-nav";
 const Search = ({ onSearch }) => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   const handleSearch = () => {
     onSearch(query);
   };
 
   return (
-    <div>
-        <button><Link to="/dashboard">Home</Link></button>
-      <input 
-        type="text" 
-        value={query} 
-        onChange={(e) => setQuery(e.target.value)} 
-        placeholder="Buscar..."
-      />
-        
+    <div className="dashboard">
+      <header className="dashboard-header">
+        <h1>Kuro</h1>
+      </header>
+      <nav className="dashboard-nav">
+        <DashboardNav />
+      </nav>
+      <main className="dashboard-main">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Buscar..."
+        />
         <button onClick={handleSearch}>Buscar</button>
-        
+      </main>
     </div>
   );
 };

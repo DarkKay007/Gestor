@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from '../Links';
+import { Link } from './components/Links';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -25,6 +25,8 @@ const Login = () => {
             // Si la respuesta indica que el inicio de sesión fue exitoso, establecer isLoggedIn en true
             if (response.ok) {
                 setIsLoggedIn(true);
+            } else {
+                setError('Usuario no encontrado o contraseña incorrecta');
             }
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
@@ -32,7 +34,7 @@ const Login = () => {
         }
     };
 
-    // Si el usuario está autenticado, rendering un mensaje de bienvenida en lugar del formulario de inicio de sesión
+    // Si el usuario está autenticado, renderiza un mensaje de bienvenida en lugar del formulario de inicio de sesión
     if (isLoggedIn) {
         return (
             <div className="login-container">
@@ -42,7 +44,7 @@ const Login = () => {
         );
     }
 
-    // Si el usuario no está autenticado, rendering el formulario de inicio de sesión
+    // Si el usuario no está autenticado, renderiza el formulario de inicio de sesión
     return (
         <div className="login-container">
             <button><Link to="/">Home</Link></button>

@@ -1,22 +1,6 @@
 import jwt from "jsonwebtoken";
-import { config } from "dotenv";
+import { pool } from "../config/bd-mysql.js";
 import Cookies from "js-cookie"; // Importa la biblioteca js-cookie
-
-config();
-
-// Función para crear un token
-export const tokenSign = (data) => {
-    return jwt.sign(
-        {   
-            correo: data.email,
-            password: data.password,
-            nombre: data.name
-        }, process.env.JWT_SECRET,
-        {
-            expiresIn: process.env.JWT_TIMEEXPIRED
-        },
-    );
-}
 
 // Función para verificar un token
 const verifyToken = (token) => {
@@ -28,24 +12,46 @@ const verifyToken = (token) => {
 }
 
 // Middleware para validar permisos con token
-export const validarPermiso = (req, res, next) => { 
+export const validarPermiso = async (req, res, next) => { 
     try {
-        let token = req.headers['x-acces-token'];
-        if (verifyToken(token) == null) {
-            res.json({
-                "error": "Sin permiso de ingreso",
-                "type": "token errado"
-            });
-        } else {
-            // Si el token es válido, guarda el token en las cookies
-            Cookies.set('token', token); // Guarda el token en una cookie llamada 'token'
-            next();
+        let token = Cookies.get('token'); // Obtiene el token de la cookie
+
+        if (!token) {
+            return res.status(401).json({ message: "No se proporcionó un token" });
         }
+
+        const decodedToken = verifyToken(token);
+
+        if (!decodedToken) {
+            return res.status(401).json({ message: "Token inválido o expirado" });
+        }
+
+        // Verifica si el token está en la base de datos
+        const result = await pool.query("SELECT * FROM tokens WHERE token = ?", [token]);
+
+        if (result.length === 0) {
+            return res.status(401).json({ message: "Token no encontrado en la base de datos" });
+        }
+
+        // Si todo está bien, el token es válido y existe en la base de datos
+        next();
     } catch (error) {
         console.log(error);
-        res.json({
-            "error": error,
-            "type": "token errado"
+        res.status(500).json({
+            error: error.message,
+            message: "Error al validar el token"
         });
     }
+}
+export const tokenSign = (data) => {
+    return jwt.sign(
+        {   
+            email: data.email,
+            id: data.id
+        }, 
+        process.env.JWT_SECRET,
+        {
+            expiresIn: process.env.JWT_TIMEEXPIRED
+        },
+    );
 }
