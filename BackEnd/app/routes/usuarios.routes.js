@@ -6,10 +6,10 @@ const routerUser = Router();
 routerUser.post("/login", loginUser)
 
 routerUser.get("/usuario/:id",  getUser);
-routerUser.post("/usuario", postUser);
+routerUser.post("/usuario",validarPermiso, postUser);
 routerUser.put("/usuario", validarPermiso, putUser);
-routerUser.delete("/usuario", validarPermiso, deleteUser);
-routerUser.get("/usuario", UserList);
+routerUser.delete("/usuario", deleteUser);
+routerUser.get("/usuario", validarPermiso,UserList);
 
 
 

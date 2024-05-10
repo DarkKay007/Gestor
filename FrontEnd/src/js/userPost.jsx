@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import DashboardNav from "../pages/components/dashboard-nav";
+import Cookies from 'js-cookie';
+
 const CreateUserForm = () => {
   const [user, setUser] = useState("");
   const [name, setName] = useState("");
@@ -12,6 +14,10 @@ const CreateUserForm = () => {
     event.preventDefault();
 
     try {
+      const token = Cookies.get('token');
+        if (!token) {
+          throw new Error('No se encontró un token en las cookies');
+        }
       const response = await fetch("http://localhost:666/api/usuario", {
         method: "POST",
         headers: {
