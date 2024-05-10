@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from './components/Links';
+import Cookies from 'js-cookie';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -22,11 +23,12 @@ const Login = () => {
             const data = await response.json();
             console.log(data);
 
-            // Si la respuesta indica que el inicio de sesión fue exitoso, establecer isLoggedIn en true
             if (response.ok) {
                 setIsLoggedIn(true);
+                // Guardar el token en las cookies con una fecha de caducidad
+                Cookies.set('token', data.token, { expires: 1 });
             } else {
-                setError('Usuario no encontrado o contraseña incorrecta');
+                setError(data.respuesta); // Mostrar el mensaje de error recibido del servidor
             }
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
