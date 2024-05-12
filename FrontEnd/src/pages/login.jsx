@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from './components/Links';
 import Cookies from 'js-cookie';
+import { FaHome } from 'react-icons/fa';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -41,7 +42,7 @@ const Login = () => {
         return (
             <div className="login-container">
                 <h2>Bienvenido, Usuario!</h2>
-                <button><Link to={'/dashboard'}>Ingresar A Kuro</Link></button>
+                <Link to={'/dashboard'}>Ingresar A Kuro</Link>
             </div>
         );
     }
@@ -49,7 +50,13 @@ const Login = () => {
     // Si el usuario no está autenticado, renderiza el formulario de inicio de sesión
     return (
         <div className="login-container">
-            <button><Link to="/">Home</Link></button>
+           <div className='login-container-form'>
+           <button className="link-button">
+  <Link to="/">
+    <FaHome />
+    <span>Home</span>
+  </Link>
+</button>
             <h2>Iniciar sesión en Kuro Gestor</h2>
             {error && <p className="error-message">{error}</p>}
             <form onSubmit={handleSubmit}>
@@ -67,6 +74,7 @@ const Login = () => {
                 </div>
                 <button type="submit" className="Button-Sing-In">Iniciar Sesión</button>
             </form>
+           </div>
         </div>
     );
 }

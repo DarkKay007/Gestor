@@ -1,5 +1,6 @@
 import React from 'react';
 import DashboardNav from './components/dashboard-nav';
+import "../styles/dashboard.css"
 const Dashboard = () => {
     return (
         <div className="dashboard">

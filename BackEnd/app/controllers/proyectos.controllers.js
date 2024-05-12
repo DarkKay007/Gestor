@@ -31,8 +31,9 @@ export const postProject = async (req, res) => {
 };
 
 export const putProject = async (req, res) => {
-  const { ID, Nombre, Descripcion, FechaInicio, FechaFin } = req.body;
+  const { Nombre, Descripcion, FechaInicio, FechaFin } = req.body;
   const date_create = getCurrentDateTime();
+  const ID = req.params.id;
 
   try {
     await pool.query(
@@ -47,7 +48,7 @@ export const putProject = async (req, res) => {
 };
 
 export const delProject = async (req, res) => {
-  const ID = req.body.ID;
+  const ID = req.params.id;
 
   try {
     await pool.query("DELETE FROM proyectos WHERE ID = ?", [ID]);

@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DashboardNav from "./dashboard-nav";
-import "../../styles/dashboard.css"
+import "../../styles/projectShow.css"
+import Cookies from 'js-cookie';
 const ProjectComponent = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get("http://localhost:666/api/projects");
+        const token = Cookies.get('token'); // Obtener el token de las cookies
+
+        const response = await axios.get('http://localhost:666/api/projects', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` 
+          }
+        });
         setProjects(response.data);
       } catch (error) {
         console.error("Error fetching projects:", error);
@@ -17,6 +25,11 @@ const ProjectComponent = () => {
 
     fetchProjects();
   }, []);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString(); // Esto muestra solo la fecha en formato local
+  };
 
   return (
     <div className="dashboard">
@@ -43,8 +56,8 @@ const ProjectComponent = () => {
                 <td>{project.ID}</td>
                 <td>{project.Nombre}</td>
                 <td>{project.Descripcion}</td>
-                <td>{project.FechaInicio}</td>
-                <td>{project.FechaFin}</td>
+                <td>{formatDate(project.FechaInicio)}</td>
+                <td>{formatDate(project.FechaFin)}</td>
               </tr>
             ))}
           </tbody>

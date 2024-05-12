@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DashboardNav from "../pages/components/dashboard-nav";
-import Cookies from 'js-cookie';
-
+import Cookies from "js-cookie";
+import "../styles/userPost.css";
 const CreateUserForm = () => {
   const [user, setUser] = useState("");
   const [name, setName] = useState("");
@@ -14,15 +14,15 @@ const CreateUserForm = () => {
     event.preventDefault();
 
     try {
-      const token = Cookies.get('token');
-        if (!token) {
-          throw new Error('No se encontró un token en las cookies');
-        }
+      const token = Cookies.get("token");
+      if (!token) {
+        throw new Error("No se encontró un token en las cookies");
+      }
       const response = await fetch("http://localhost:666/api/usuario", {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ user, name, password, email, rol }),
       });
@@ -94,6 +94,8 @@ const CreateUserForm = () => {
               onChange={(e) => setRol(e.target.value)}
               required
             >
+              <option value="">Seleccionar Rol</option>{" "}
+              {/* Opción predeterminada */}
               <option value="Usuario">Usuario</option>
               <option value="Administrador">Administrador</option>
             </select>

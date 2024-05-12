@@ -1,0 +1,25 @@
+.SideBar {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .SideBar a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color:#eef2ff; 
+    margin-bottom: 10px;
+  }
+  
+  .SideBar a:hover {
+    color: #a5b4fc;
+  }
+  
+  .SideBar h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #eef2ff;
+  }
+  

@@ -8,7 +8,6 @@ export const tokenSign = (data) =>{ //Para crear token
   return jwt.sign({
       email : data.email,
       password : data.password,
-      firma : "becerra"
   },process.env.JWT_SECRET,
   {
       expiresIn : process.env.JWT_TIMEEXPIRED

@@ -5,21 +5,21 @@ import axios from "axios"
 import Cookies from 'js-cookie';
 
 const UserList = () => {
-  const [user, setUser] = useState([]);
+  const [userList, setUserList] = useState([]);
 
   useEffect(() => {
     const fetchUserList = async () => {
       try {
-        const token = Cookies.get('token'); // Obtener el token de las cookies
+        const token = Cookies.get('token');
 
         const response = await axios.get('http://localhost:666/api/usuario', {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}` // Incluir el token en el encabezado de autorización
+            'Authorization': `Bearer ${token}` 
           }
         });
 
-        setUser(response.data);
+        setUserList(response.data);
       } catch (error) {
         console.error('Error fetching UserList:', error);
       }
@@ -28,6 +28,43 @@ const UserList = () => {
     fetchUserList();
   }, []);
 
+  const updateUser = async (userId, updatedUser) => {
+    try {
+      const token = Cookies.get('token');
+
+      const response = await axios.put(`http://localhost:666/api/usuario/${userId}`, updatedUser, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` 
+        }
+      });
+
+      const updatedUserList = userList.map(user => user.id === userId ? response.data : user);
+      setUserList(updatedUserList);
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
+  };
+
+  const deleteUser = async (id) => {
+    try {
+      const token = Cookies.get('token');
+  
+      await axios.delete(`http://localhost:666/api/usuario/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` 
+        }
+      });
+  
+      // Create a new array with the updated user list
+      const updatedUserList = [...userList].filter(user => user.id!== id);
+      setUserList(updatedUserList);
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+  console.log(axios.delete)
   return (
     <div className="dashboard">
       <header className='dashboard-header'>
@@ -37,7 +74,7 @@ const UserList = () => {
         <DashboardNav />
       </nav>
       <main className='dashboard-main'>
-        <UserListTable userList={user} /> {/* Pasar user en lugar de UserList */}
+        <UserListTable userList={userList} updateUser={updateUser} deleteUser={deleteUser} />
       </main>
     </div>
   );

@@ -1,7 +1,6 @@
 import { pool } from "../config/bd-mysql.js";
-
 import { tokenSign } from "../middlewares/usuarios.middlewares.js";
-import { getCurrentDateTime } from "../util/dateHelper.js "; // Importa una función para obtener la fecha y hora actual
+import { getCurrentDateTime } from "../util/dateHelper.js ";
 
 export const getUser = async (req, res) => {
   let id = req.params.id;
@@ -73,16 +72,16 @@ export const putUser = async (req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
-  const id = req.body.id;
+  const { id } = req.params;
 
   try {
-    await pool.query("DELETE FROM usuarios WHERE id = ?", [id]);
+    await pool.query("DELETE FROM usuarios WHERE id =?", [id]);
 
     res.json({ message: "Usuario eliminado exitosamente" });
   } catch (error) {
     res
-      .status(500)
-      .json({ error: error.message, message: "Error al eliminar usuario" });
+     .status(500)
+     .json({ error: error.message, message: "Error al eliminar usuario" });
   }
 };
 

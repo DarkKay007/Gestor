@@ -1,26 +1,35 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
 .dashboard{
-    width: 80%;
-    height: 80%;
+    width: 100vw;
+    height: 100vh;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 10fr;
-    font-family: 'Courier New', Courier, monospace;
+    grid-template-columns: 15% 85%;
+    grid-template-rows: 10% 1fr;
 }
 .dashboard-header{
-    grid-column: 1/2;
-    grid-row: 1/2;
+    grid-column: span 2;
+    background-color: #c7d2fe;
 }
 .dashboard-nav{
-    grid-column: 1/2;
-    grid-row: 2/3;
+    background-color: #6366f1;
+    color: #eef2ff;
+    height: 100%;
+    font-size: 20px;
+    padding-top: 50px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    
 }
-.dashboard-main {
+.dashboard-main{
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: auto; 
+    background-color: #312e81;
+    color: #eef2ff;
 }

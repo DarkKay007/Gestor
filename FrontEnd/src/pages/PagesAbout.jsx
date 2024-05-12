@@ -1,4 +1,5 @@
 import { Link } from "./components/Links"
+import { FaHome } from "react-icons/fa";
 export default function AboutPage () {
     return(
     <>
@@ -7,7 +8,7 @@ export default function AboutPage () {
                 <h1>Acerca de Nosotros</h1>
                 <nav>
                     <ul>
-                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/"><FaHome />Home</Link></li>
                         {/* Agrega más elementos de navegación según sea necesario */}
                     </ul>
                 </nav>

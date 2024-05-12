@@ -1,0 +1,31 @@
+.userList-table {
+    font-weight: bold;    
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .userList-table th,
+  .userList-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .userList-table th {
+    background-color:#082f49;
+  }
+  
+  .userList-data-td {
+    white-space: nowrap; /* Evita que el contenido se envuelva */
+  }
+  
+  .userList-date-th,
+  .userList-date-td {
+    /* Para mostrar solo la fecha y ocultar la hora */
+  }
+  
+  /* Opcional: Estilo para filas impares */
+  .userList-table tbody tr:nth-child(odd) {
+    background-color:#312e81;
+  }
+  

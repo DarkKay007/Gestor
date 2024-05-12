@@ -1,0 +1,38 @@
+  .dashboard-main form {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 50% ;
+  }
+  
+  .dashboard-main form div {
+    margin-bottom: 10px;
+    
+  }
+  
+  .dashboard-main form label {
+    font-weight: bold;
+  }
+  
+  .dashboard-main form input,
+  .dashboard-main form select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 80%;
+    right: 20px;
+  }
+  
+  .dashboard-main form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .dashboard-main form button:hover {
+    background-color: #0056b3;
+  }
+  

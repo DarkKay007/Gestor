@@ -7,17 +7,19 @@ import cookieParser from 'cookie-parser';
  */
 import routerUser from './usuarios.routes.js';
 import routerProjects from './projects.routes.js';
+import routerTareas from './tareas.routes.js';
+import routerAsignaciones from './asignaciones.routes.js';
 
 const app = express();
 const route = Router(); // Crea una instancia de Router
 
 // Configura cookie-parser
 app.use(cookieParser());
-
-// Monta las rutas de usuarios bajo la ruta '/api'
+route.use("/api",routerTareas)
 route.use("/api", routerUser);
-// Monta las rutas de proyectos bajo la ruta '/api'
 route.use("/api", routerProjects);
+route.use("/api", routerAsignaciones);
+
 
 // Ruta que utiliza cookies
 route.get('/api', (req, res) => {
