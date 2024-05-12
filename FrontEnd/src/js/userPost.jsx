@@ -21,7 +21,8 @@ const CreateUserForm = () => {
       const response = await fetch("http://localhost:666/api/usuario", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ user, name, password, email, rol }),
       });

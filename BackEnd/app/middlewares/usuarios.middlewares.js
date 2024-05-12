@@ -3,40 +3,44 @@ import { config } from "dotenv";
 import cors from "cors"
 config();
 
+
 export const tokenSign = (data) =>{ //Para crear token
-    return jwt.sign({
-        email : data.email,
-        password : data.password,
-        firma : "becerra"
-    },process.env.JWT_SECRET,
-    {
-        expiresIn : process.env.JWT_TIMEEXPIRED
-    })
+  return jwt.sign({
+      email : data.email,
+      password : data.password,
+      firma : "becerra"
+  },process.env.JWT_SECRET,
+  {
+      expiresIn : process.env.JWT_TIMEEXPIRED
+  })
 }
-export const verifyToken = (token) => {
-    try {
-        return jwt.verify(token, process.env.JWT_SECRET);
-    } catch (error) {
-        return null;
-    }
-}
-export const validarPermiso = (req, res, next)=>{
-
-  let token = req.body["x-access-token"];
-
+export const validarPermiso = (req, res, next) => {
   try {
-      if (verifyToken(token)==null){
-          res.json({
-              "error":"No tiene permiso para acceder",
-              "token": "token invalido"
-          })
-      }else{
-          next();
-      }
-  } catch (error) {
-      res.json({
-          "error":error,
-          "token": "token invalido"
+    // Obtener el token del encabezado de autorización
+    const token = req.headers.authorization.split(" ")[1];
+
+    // Verificar si el token es válido
+    if (!token || verifyToken(token) === null) {
+      return res.status(403).json({
+        error: "No tiene permiso para acceder",
+        token: "Token inválido"
       });
+    }
+
+    // Si el token es válido, pasar al siguiente middleware
+    next();
+  } catch (error) {
+    return res.status(500).json({
+      error: error.message,
+      token: "Error al procesar el token"
+    });
   }
-}
+};
+
+export const verifyToken = (token) => {
+  try {
+    return jwt.verify(token, process.env.JWT_SECRET);
+  } catch (error) {
+    return null;
+  }
+};

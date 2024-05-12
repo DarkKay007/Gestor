@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "./components/Links";
 import DashboardNav from "./components/dashboard-nav";
 const Search = ({ onSearch }) => {
   const [query, setQuery] = useState("");

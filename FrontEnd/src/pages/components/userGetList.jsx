@@ -1,38 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import DashboardNav from './dashboard-nav';
 import UserListTable from '../../js/userlist';
+import axios from "axios"
 import Cookies from 'js-cookie';
 
 const UserList = () => {
-  const [userList, setUserList] = useState([]);
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchUserList = async () => {
       try {
-        // Obtener el token de las cookies
-        const token = Cookies.get('token');
-        if (!token) {
-          throw new Error('No se encontró un token en las cookies');
-        }
+        const token = Cookies.get('token'); // Obtener el token de las cookies
 
-        const response = await fetch('http://localhost:666/api/usuario', {
+        const response = await axios.get('http://localhost:666/api/usuario', {
           headers: {
-            Authorization: `Bearer ${token}` // Incluir el token en el encabezado Authorization
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // Incluir el token en el encabezado de autorización
           }
         });
 
-        if (!response.ok) {
-          throw new Error('Error al obtener la lista de usuarios');
-        }
-        
-        const data = await response.json();
-        setUserList(data);
+        setUser(response.data);
       } catch (error) {
-        console.error('Error al obtener la lista de usuarios:', error);
+        console.error('Error fetching UserList:', error);
       }
     };
 
-    fetchData();
+    fetchUserList();
   }, []);
 
   return (
@@ -44,7 +37,7 @@ const UserList = () => {
         <DashboardNav />
       </nav>
       <main className='dashboard-main'>
-        <UserListTable userList={userList} />
+        <UserListTable userList={user} /> {/* Pasar user en lugar de UserList */}
       </main>
     </div>
   );

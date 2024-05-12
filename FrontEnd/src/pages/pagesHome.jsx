@@ -7,10 +7,9 @@ export default function HomePage () {
                 <h1>Bienvenido a nuestra página</h1>
                 <nav>
                     <ul>
-                    <li><Link to={'/about'}>Acerca De Nosotros</Link></li>
-                    <li></li>    <Link to="/login">Sing-In</Link>
-                    <li><Link to={"/dashboard"}>dashboard</Link></li>
-                    
+                        <li><Link to={'/about'      }>Acerca De Nosotros</Link></li>
+                        <li><Link to={"/login"      }>Sing-In   </Link></li>
+                        <li><Link to={"/dashboard"  }>dashboard </Link></li>
                     </ul>
                 </nav>
             </header>
