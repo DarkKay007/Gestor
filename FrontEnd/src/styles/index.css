@@ -1,12 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 body {
     width: 100vw;
     height: 100vh;
 }
-
-.login-container,
 .about-page,
 .presentation-page {
-    background-color: #1e1b4b;
+    background-color: #d5d9de;
     color: #e0e7ff;
     width: 100%;
     height: 100%;
@@ -16,12 +17,33 @@ body {
     flex-direction: column;
     font-family: 'Courier New', Courier, monospace;
     font-size: 25px;
+    
+}
+.icoHome{
+    width: 50%;
+    height: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 2000px;
+    background-image: url(../assets/dashboard.png);
+}
+.content-home{
+    height: 80vh;
+    background-color: #ff1054;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 50px;
 }
 
 h1 {
-    color: #eef2ff;
+    color: #000000;
     font-size: 30px;
     margin-bottom: 20px;
+    font-weight: 900;
 }
 
 nav {
@@ -33,38 +55,44 @@ nav a {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: #eef2ff;
+    color: #000000;
     margin-bottom: 10px;
+    font-weight: 900;
+    font-size: 30px;
 }
 
 nav a:hover {
-    color: #a5b4fc;
+    color: #ffffff;
 }
 
 .login-container {
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-image: url(.././assets/montanas-nevadas-en-nueva-zelanda-3312.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
+    border-radius: 5px; 
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #6c6ea0;
+    width: min-content;
 }
 
 .login-container-form {
-    max-width: 400px;
+    width: 400px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #040e3e9e;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #1e1b4b;
+    
 }
 
 .login-container h2 {
     margin-bottom: 20px;
     font-size: 24px;
     font-weight: bold;
-    color: #f5f5f5;
+    color: #1e1b4b;
 }
 
 .error-message {
@@ -80,11 +108,11 @@ nav a:hover {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #ececec;
+    
 }
 
 .form-control {
-    width: 100%;
+    width: 50px;
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -94,7 +122,7 @@ nav a:hover {
 
 .form-check-label {
     font-weight: normal;
-    color: #dcdcdc;
+
 }
 
 .Button-Sing-In {

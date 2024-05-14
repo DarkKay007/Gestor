@@ -34,13 +34,13 @@ const ProjectComponent = () => {
   return (
     <div className="dashboard">
       <header className='dashboard-header'>
-        <h1>Lista De Usuarios</h1>
+        <h1>Lista De Proyectos</h1>
       </header>
       <nav className='dashboard-nav'>
         <DashboardNav />
       </nav>
       <main className='dashboard-main'>
-        <table>
+        <table className="showProjectsTable">
           <thead>
             <tr>
               <th>ID</th>

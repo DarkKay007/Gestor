@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DashboardNav from './dashboard-nav';
-import UserListTable from '../../js/userlist';
+import UserListTable from './userlist';
 import axios from "axios"
 import Cookies from 'js-cookie';
 
@@ -28,18 +28,18 @@ const UserList = () => {
     fetchUserList();
   }, []);
 
-  const updateUser = async (userId, updatedUser) => {
+  const updateUser = async (id, updatedUser) => {
     try {
       const token = Cookies.get('token');
 
-      const response = await axios.put(`http://localhost:666/api/usuario/${userId}`, updatedUser, {
+      const response = await axios.put(`http://localhost:666/api/usuario/${id}`, updatedUser, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}` 
         }
       });
 
-      const updatedUserList = userList.map(user => user.id === userId ? response.data : user);
+      const updatedUserList = userList.map(user => user.id === id ? response.data : user);
       setUserList(updatedUserList);
     } catch (error) {
       console.error('Error updating user:', error);

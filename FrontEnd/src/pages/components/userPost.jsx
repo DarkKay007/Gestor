@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import DashboardNav from "../pages/components/dashboard-nav";
+import DashboardNav from "./dashboard-nav";
 import Cookies from "js-cookie";
-import "../styles/userPost.css";
+import "../../styles/userPost.css";
+import { Alert } from "flowbite-react";
+
+
+
 const CreateUserForm = () => {
   const [user, setUser] = useState("");
   const [name, setName] = useState("");
@@ -44,10 +48,15 @@ const CreateUserForm = () => {
         <DashboardNav />
       </nav>
       <main className="dashboard-main">
-        {message && <p>{message}</p>}
+      
         <form onSubmit={handleSubmit}>
+        {message && (
+        <Alert color="warning" withBorderAccent>
+          <span className="font-medium">{message}</span>
+        </Alert>
+      )}
           <div>
-            <label htmlFor="user">UserName:</label>
+            <div className="userPost-Text" htmlFor="user">UserName:</div>
             <input
               type="text"
               id="user"
@@ -57,7 +66,7 @@ const CreateUserForm = () => {
             />
           </div>
           <div>
-            <label htmlFor="name">Nombre:</label>
+            <div className="userPost-Text" htmlFor="name">Nombre:</div>
             <input
               type="text"
               id="name"
@@ -67,7 +76,7 @@ const CreateUserForm = () => {
             />
           </div>
           <div>
-            <label htmlFor="password">Contraseña:</label>
+            <div className="userPost-Text" htmlFor="password">Contraseña:</div>
             <input
               type="password"
               id="password"
@@ -77,7 +86,7 @@ const CreateUserForm = () => {
             />
           </div>
           <div>
-            <label htmlFor="email">Email:</label>
+            <div className="userPost-Text" htmlFor="email">Email:</div>
             <input
               type="email"
               id="email"
@@ -87,7 +96,7 @@ const CreateUserForm = () => {
             />
           </div>
           <div>
-            <label htmlFor="rol">Rol:</label>
+            <div className="userPost-Text" htmlFor="rol">Rol:</div>
             <select
               id="rol"
               value={rol}

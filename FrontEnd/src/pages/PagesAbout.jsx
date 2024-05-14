@@ -4,6 +4,7 @@ export default function AboutPage () {
     return(
     <>
          <div className="about-page">
+         <div className="content-home">
             <header>
                 <h1>Acerca de Nosotros</h1>
                 <nav>
@@ -15,14 +16,17 @@ export default function AboutPage () {
             </header>
             <main>
                 <section className="about-section">
-                    <h2>Nuestra Historia</h2>
-                    <p>Breve descripción sobre la historia de la empresa o proyecto.</p>
+                    <h2>Descripción</h2>
+                    <p>Proyecto para el proyecto final del sena</p>
+                    <p>Realizado con React+Vite y nodeJs</p>
                 </section>
-                {/* Agrega más secciones según sea necesario */}
+                <br /><br />
+                <br /><br />
             </main>
             <footer>
                 <p>Derechos de autor &copy; 2024 - Todos los derechos reservados</p>
             </footer>
+        </div>
         </div>
     </>
     )

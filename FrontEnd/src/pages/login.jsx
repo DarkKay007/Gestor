@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
-import { Link } from './components/Links';
+import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { FaHome } from 'react-icons/fa';
-
+import { Button } from "flowbite-react";
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para controlar si el usuario está autenticado
+    const [isLoggedIn, setIsLoggedIn] = useState(false); 
+
+    // Verificar el token al cargar el componente
+    useEffect(() => {
+        const token = Cookies.get('token');
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
+
+    const handleLogout = () => {
+        // Eliminar la cookie de sesión
+        Cookies.remove('token');
+        // Actualizar el estado de isLoggedIn a falso
+        setIsLoggedIn(false);
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -17,7 +30,7 @@ const Login = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
-                },
+                },  
                 body: JSON.stringify({ email, password })
             });
 
@@ -26,10 +39,10 @@ const Login = () => {
 
             if (response.ok) {
                 setIsLoggedIn(true);
-                // Guardar el token en las cookies con una fecha de caducidad
+                
                 Cookies.set('token', data.token, { expires: 1 });
             } else {
-                setError(data.respuesta); // Mostrar el mensaje de error recibido del servidor
+                setError(data.respuesta); 
             }
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
@@ -37,25 +50,23 @@ const Login = () => {
         }
     };
 
-    // Si el usuario está autenticado, renderiza un mensaje de bienvenida en lugar del formulario de inicio de sesión
+    
     if (isLoggedIn) {
         return (
             <div className="login-container">
+            <div className="login-container-form">
                 <h2>Bienvenido, Usuario!</h2>
-                <Link to={'/dashboard'}>Ingresar A Kuro</Link>
+                <Button outline gradientDuoTone="pinkToOrange" onClick={handleLogout}>Cerrar Sesión</Button>
+            </div>
             </div>
         );
     }
 
-    // Si el usuario no está autenticado, renderiza el formulario de inicio de sesión
+    
     return (
         <div className="login-container">
            <div className='login-container-form'>
            <button className="link-button">
-  <Link to="/">
-    <FaHome />
-    <span>Home</span>
-  </Link>
 </button>
             <h2>Iniciar sesión en Kuro Gestor</h2>
             {error && <p className="error-message">{error}</p>}

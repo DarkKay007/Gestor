@@ -7,11 +7,13 @@ import Page404 from "./pages/404.jsx";
 import UserList from "./pages/components/userGetList.jsx";
 import Dashboard from "./pages/dashboard.jsx"
 import Search from "./pages/search.jsx";
-import CreateUserForm from "./js/userPost.jsx";
+import CreateUserForm from "./pages/components/userPost.jsx";
 import ProjectComponent from "./pages/components/projectShow.jsx";
 import calendar from "./pages/calendarPage.jsx";
 import TasksComponent from "./pages/tasks.jsx";
 import DashboardAssignment from "./pages/dashboard-asignaciones.jsx";
+
+
 const routes = [
   { path: "/",                      component: HomePage},
   { path: "/about",                 component: AboutPage,},
@@ -25,6 +27,7 @@ const routes = [
   { path: "/dashboard/calendar",    component: calendar},
   { path: "/dashboard/tasks",    component: TasksComponent},
   { path: "/dashboard/asignaciones",    component: DashboardAssignment},
+
 ];
 
 function App() {

@@ -1,0 +1,43 @@
+.contentPage404 {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle, #ff4500 5%, #ff0000 50%, #8b0000 95%);
+  animation: burning 5s infinite alternate;
+}
+@keyframes burning {
+  0% {
+    background: radial-gradient(circle, #ff4500 5%, #ff0000 50%, #8b0000 95%);
+  }
+  50% {
+    background: radial-gradient(circle, #ff4500 10%, #ff0000 40%, #8b0000 90%);
+  }
+  100% {
+    background: radial-gradient(circle, #ff4500 5%, #ff0000 50%, #8b0000 95%);
+  }
+}
+.page-404 {
+  background-color: #c1cad6;
+  padding: 100px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.Button404{
+    padding-top: 20px;
+    width: 100%;
+}
+.Button404 > Button{
+    width: 100%;
+}
+.page-404 > p,
+.page-404 > h1 {
+  color: black;
+}
