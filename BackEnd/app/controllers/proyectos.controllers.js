@@ -32,13 +32,13 @@ export const postProject = async (req, res) => {
 
 export const putProject = async (req, res) => {
   const { Nombre, Descripcion, FechaInicio, FechaFin } = req.body;
-  const date_create = getCurrentDateTime();
+  
   const ID = req.params.id;
 
   try {
     await pool.query(
-      "UPDATE proyectos SET Nombre = ?, Descripcion = ?, FechaInicio = ?, FechaFin = ?, date_create = ? WHERE ID = ?",
-      [Nombre, Descripcion, FechaInicio, FechaFin, date_create, ID]
+      "UPDATE proyectos SET Nombre = ?, Descripcion = ?, FechaInicio = ?, FechaFin = ?, WHERE ID = ?",
+      [Nombre, Descripcion, FechaInicio, FechaFin,  ID]
     );
 
     res.json({ message: "Proyecto actualizado exitosamente" });

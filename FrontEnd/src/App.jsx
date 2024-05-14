@@ -12,7 +12,7 @@ import ProjectComponent from "./pages/components/projectShow.jsx";
 import calendar from "./pages/calendarPage.jsx";
 import TasksComponent from "./pages/tasks.jsx";
 import DashboardAssignment from "./pages/dashboard-asignaciones.jsx";
-
+import DashboardProjectsManagement from "./pages/DashboardProjectsManagement.jsx";
 
 const routes = [
   { path: "/",                      component: HomePage},
@@ -25,9 +25,10 @@ const routes = [
   { path: "/dashboard/UserFormPost",component: CreateUserForm},
   { path: "/dashboard/Projects",    component: ProjectComponent},
   { path: "/dashboard/calendar",    component: calendar},
-  { path: "/dashboard/tasks",    component: TasksComponent},
+  { path: "/dashboard/tasks",       component: TasksComponent},
   { path: "/dashboard/asignaciones",    component: DashboardAssignment},
-
+  { path: "/dashboard/ProjectsManagement",    component: DashboardProjectsManagement},
+  { path: "*",                       component: Page404,}
 ];
 
 function App() {

@@ -12,6 +12,7 @@ import { PiUserListFill } from "react-icons/pi";
 import { FaUserPlus } from "react-icons/fa6";
 import { BsCalendar2CheckFill } from "react-icons/bs";
 import { FaTasks } from "react-icons/fa";
+import { GrProjects } from "react-icons/gr";
 const DashboardNav = () => {
     return (
         <div className="SideBar">
@@ -24,7 +25,7 @@ const DashboardNav = () => {
         <Link to={"/dashboard/Projects"} className="sidebar-link"><RiTeamFill />Proyectos</Link>
         <Link to={"/dashboard/tasks"} className="sidebar-link"><FaTasks />Tareas</Link>
         <Link to={"/dashboard/asignaciones"} className="sidebar-link"><MdAssignmentAdd />Asignaciones</Link>
-        
+        <Link to={"/dashboard/ProjectsManagement"} className="sidebar-link"><GrProjects />Administrar</Link>
         <h3>Calendario</h3>
         <Link to={"/dashboard/calendar"} className="sidebar-link"><BsCalendar2CheckFill />Agenda</Link>
     </div>

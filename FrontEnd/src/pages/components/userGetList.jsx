@@ -64,7 +64,6 @@ const UserList = () => {
       console.error('Error deleting user:', error);
     }
   };
-  console.log(axios.delete)
   return (
     <div className="dashboard">
       <header className='dashboard-header'>
