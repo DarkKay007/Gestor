@@ -1,27 +1,14 @@
-/* Estilos para la tabla */
 .showProjectsTable {
-
-  width: 98%; 
+  width: 98%;
   margin-top: 20px;
   border-collapse: collapse;
-
 }
-
-
-
-/* Estilos para las celdas del encabezado */
 th {
   background-color: #66c7f4;
   padding: 12px;
   text-align: left;
 }
 
-
-tbody tr:nth-child(even) {
-  background-color: #66c7f4; /* Color de fondo de las filas */
-}
-
-/* Estilos para las celdas de la tabla */
 td {
   background-color: azure;
   color: #000000;
@@ -29,17 +16,64 @@ td {
   text-align: left;
   border-bottom: 1px solid #ccc; /* Borde inferior de las celdas */
 }
-.ContentProjectMAnagement{
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr ;
-  gap: 20px;
+/**
+** ProjectManagement
+*/
+.TitlePRojectManagement{
+  text-align: center;
+  font-size: 24px;
+  color: #000000;
+  font-weight: bolder;
 }
-.ulProjectManagement{
+.ContentProjectMAnagement {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr ;
+  grid-template-columns: 30% 60%;
   gap: 20px;
+  justify-content: center;
+}
+/**
+*TODO:Estilo de la tabla de Project Management
+*/
+.ListProjectManagement {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 5% 85% 10%;
+}
+.tableProjectManagement {
+  height: auto;
+  width: 100%;
+}
+.ListProjectManagement> :nth-child(3){
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/**
+*TODO: Estilos para el formulario del ProjectManagement
+*/
+
+.FormProjectManagement {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.form-container {
+  max-width: 100%;
+  margin: 0 auto; 
+}
+.form-input {
+  margin-bottom: 10px; 
+}
+.form-input input {
+  width: 100%; 
+  padding: 8px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  box-sizing: border-box; 
 }

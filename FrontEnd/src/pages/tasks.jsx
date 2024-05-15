@@ -1,3 +1,4 @@
+import { Button } from "flowbite-react";
 import DashboardNav from "./components/dashboard-nav";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -22,7 +23,7 @@ const TasksComponent = () => {
     Estado: "",
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [tasksPerPage] = useState(2);// Numero de elementos a mostrar por paginas
+  const [tasksPerPage] = useState(7); // Numero de elementos a mostrar por paginas
 
   useEffect(() => {
     fetchTasks();
@@ -96,6 +97,10 @@ const TasksComponent = () => {
     const { name, value } = event.target;
     setNewTask({ ...newTask, [name]: value });
   };
+  const handleProjectChange = (event) => {
+    const selectedProjectId = event.target.value;
+    setNewTask({ ...newTask, ID_Proyecto: selectedProjectId });
+  };
 
   return (
     <div className="dashboard">
@@ -107,61 +112,76 @@ const TasksComponent = () => {
       </nav>
       <main className="dashboard-main">
         <div className="main-tasks">
-        <div className="list-tasks">
-            <h2>Tareas</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>ID Proyecto</th>
-                  <th>Nombre</th>
-                  <th>Descripción</th>
-                  <th>Fecha de Inicio</th>
-                  <th>Fecha de Fin</th>
-                  <th>Fecha de Creación</th>
-                  <th>Estado</th>
-                  <th>Nombre del Proyecto</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentTasks.map((task) => (
-                  <tr key={task.ID}>
-                    <td>{task.ID}</td>
-                    <td>{task.ID_Proyecto}</td>
-                    <td>{task.Nombre}</td>
-                    <td>{task.Descripcion}</td>
-                    <td>{convertToLocalDate(task.FechaInicio)}</td>
-                    <td>{convertToLocalDate(task.FechaFin)}</td>
-                    <td>{convertToLocalDate(task.date_create)}</td>
-                    <td>{task.Estado}</td>
-                    <td>
-                      {projects.find((project) => project.ID === task.ID_Proyecto)?.Nombre ||
-                        "Proyecto no encontrado"}
-                    </td>
+          <div className="list-tasks">
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>ID Proyecto</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Fin</th>
+                    <th>Fecha de Creación</th>
+                    <th>Estado</th>
+                    <th>Nombre del Proyecto</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {currentTasks.map((task) => (
+                    <tr key={task.ID}>
+                      <td>{task.ID}</td>
+                      <td>{task.ID_Proyecto}</td>
+                      <td>{task.Nombre}</td>
+                      <td>{task.Descripcion}</td>
+                      <td>{convertToLocalDate(task.FechaInicio)}</td>
+                      <td>{convertToLocalDate(task.FechaFin)}</td>
+                      <td>{convertToLocalDate(task.date_create)}</td>
+                      <td>{task.Estado}</td>
+                      <td>
+                        {projects.find(
+                          (project) => project.ID === task.ID_Proyecto
+                        )?.Nombre || "Proyecto no encontrado"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
             <div className="pagination">
-              {Array.from({ length: Math.ceil(tasks.length / tasksPerPage) }, (_, i) => (
-                <button key={i} onClick={() => handlePagination(i + 1)}>
-                  {i + 1}
-                </button>
-              ))}
+              {Array.from(
+                { length: Math.ceil(tasks.length / tasksPerPage) },
+                (_, i) => (
+                  <Button
+                    outline
+                    gradientDuoTone="tealToLime"
+                    key={i}
+                    onClick={() => handlePagination(i + 1)}
+                  >
+                    {i + 1}
+                  </Button>
+                )
+              )}
             </div>
           </div>
 
           <div className="form-task">
-            <h3>Agregar Tarea</h3>
             <form onSubmit={handleSubmit}>
               <div>
                 <label>Proyecto:</label>
-                <input
-                  type="text"
+                <select
                   name="ID_Proyecto"
                   value={newTask.ID_Proyecto}
-                  onChange={handleInputChange}
-                />
+                  onChange={handleProjectChange}
+                >
+                  <option value="">Seleccione un proyecto</option>
+                  {projects.map((project) => (
+                    <option key={project.ID} value={project.ID}>
+                      {project.Nombre} (ID: {project.ID})
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label>Nombre:</label>

@@ -23,9 +23,9 @@ const DashboardNav = () => {
         <Link to={"/dashboard/UserFormPost"} className="sidebar-link"><FaUserPlus />Agregar Usuarios</Link>
         <h3>Proyectos</h3>
         <Link to={"/dashboard/Projects"} className="sidebar-link"><RiTeamFill />Proyectos</Link>
+        <Link to={"/dashboard/ProjectsManagement"} className="sidebar-link"><GrProjects />Administrar</Link>
         <Link to={"/dashboard/tasks"} className="sidebar-link"><FaTasks />Tareas</Link>
         <Link to={"/dashboard/asignaciones"} className="sidebar-link"><MdAssignmentAdd />Asignaciones</Link>
-        <Link to={"/dashboard/ProjectsManagement"} className="sidebar-link"><GrProjects />Administrar</Link>
         <h3>Calendario</h3>
         <Link to={"/dashboard/calendar"} className="sidebar-link"><BsCalendar2CheckFill />Agenda</Link>
     </div>

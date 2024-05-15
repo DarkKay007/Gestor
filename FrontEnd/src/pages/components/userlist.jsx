@@ -5,13 +5,13 @@ import "../../styles/userList.css";
 import { Button } from "flowbite-react";
 
 const UserListTable = ({ userList, updateUser, deleteUser }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 5;
-
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString(); // Esto muestra solo la fecha en formato local
   };
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 5;
+
 
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
