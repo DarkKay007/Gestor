@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import DashboardNav from './dashboard-nav';
 import UserListTable from './userlist';
 import axios from "axios"
 import Cookies from 'js-cookie';

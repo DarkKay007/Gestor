@@ -1,3 +1,6 @@
+import NavLinks from "../components/nav-links";
+import { IoSettings } from "react-icons/io5";
+
 import "../styles/dashboard.css"
 function Dashboard() {
 
@@ -5,9 +8,13 @@ function Dashboard() {
       <>
         <div className="container-dashboard">
             <div className="header-dashboard">
-                <h1>KuroGestor</h1>
+                <div className="ico-dashboard"></div>
+                <h1>Home    </h1>
+                <div className="settings-dashboard"><h1><IoSettings /></h1></div>
             </div>
-            <div className="nav-dashboard"></div>
+            <div className="nav-dashboard">
+                <NavLinks></NavLinks>
+            </div>
             <div className="main-dashboard"></div>
         </div>
       </>

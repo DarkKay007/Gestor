@@ -4,7 +4,6 @@ import cors from "cors"
 config();
 
 
-import jwt from 'jsonwebtoken';
 
 export const tokenSign = (data) => {
     return jwt.sign({

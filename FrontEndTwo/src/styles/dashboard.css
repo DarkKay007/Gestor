@@ -6,8 +6,83 @@
     gap: 10px;
 }
 .main-dashboard,
-.nav-dashboard,
 .header-dashboard{
     background-color: #333533;
     padding: 10px;
 }
+
+.nav-dashboard{
+    transform: translateX(35%);
+    width: 60%;
+    height: 80%;
+    background-color: #333533;
+    border-radius: 20px;
+}
+
+.header-dashboard{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffd100;
+}
+.ico-dashboard{
+    z-index: 1;
+    height: 100%;
+    width: 100px;
+    background-image: url(../assets/Kuro.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+
+.team-member-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    width: 200px;
+    margin: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .team-member-image {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  
+  .team-member-info {
+    margin-top: 12px;
+  }
+  
+  .team-member-info h3 {
+    margin: 8px 0;
+    font-size: 1.2em;
+  }
+  
+  .team-member-info p {
+    margin: 4px 0;
+    color: #666;
+  }
+  
+
+
+
+  .team {
+    padding: 32px;
+    text-align: center;
+  }
+  
+  .team h2 {
+    font-size: 2em;
+    margin-bottom: 24px;
+  }
+  
+  .team-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
