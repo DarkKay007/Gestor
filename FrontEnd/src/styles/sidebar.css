@@ -4,12 +4,16 @@
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+.icoSideBar{
+  width: 100%;
+  height: 100%;
+  margin-bottom: 30px;
+}
 .SideBar a {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color:#eef2ff; 
+  color:#F9F4F5; 
   margin-bottom: 10px;
 }
 
@@ -21,8 +25,8 @@
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 18px;
-  border-bottom: 1px solid #3a3a3a ;
-  background-color: #ff1053;
+  
+  background-color: #000000;
   text-align: center;
 }
 .sidebar-link{

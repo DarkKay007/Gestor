@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import DashboardNav from "./dashboard-nav";
-import "../../styles/projectShow.css"
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Cookies from 'js-cookie';
+import '../../styles/projectShow.css';
+
 const ProjectComponent = () => {
   const [projects, setProjects] = useState([]);
 
@@ -14,12 +14,12 @@ const ProjectComponent = () => {
         const response = await axios.get('http://localhost:666/api/projects', {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}` 
+            'Authorization': `Bearer ${token}`
           }
         });
         setProjects(response.data);
       } catch (error) {
-        console.error("Error fetching projects:", error);
+        console.error('Error fetching projects:', error);
       }
     };
 
@@ -32,37 +32,15 @@ const ProjectComponent = () => {
   };
 
   return (
-    <div className="dashboard">
-      <header className='dashboard-header'>
-        <h1>Lista De Proyectos</h1>
-      </header>
-      <nav className='dashboard-nav'>
-        <DashboardNav />
-      </nav>
-      <main className='dashboard-main'>
-        <table className="showProjectsTable">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Descripción</th>
-              <th>Fecha de Inicio</th>
-              <th>Fecha de Fin</th>
-            </tr>
-          </thead>
-          <tbody>
-            {projects.map((project) => (
-              <tr key={project.ID}>
-                <td>{project.ID}</td>
-                <td>{project.Nombre}</td>
-                <td>{project.Descripcion}</td>
-                <td>{formatDate(project.FechaInicio)}</td>
-                <td>{formatDate(project.FechaFin)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </main>
+    <div className="project-grid">
+      {projects.map((project) => (
+        <div className="project-card" key={project.ID}>
+          <h3>{project.Nombre}</h3>
+          <p>{project.Descripcion}</p>
+          <p><strong>Fecha de Inicio:</strong> {formatDate(project.FechaInicio)}</p>
+          <p><strong>Fecha de Fin:</strong> {formatDate(project.FechaFin)}</p>
+        </div>
+      ))}
     </div>
   );
 };

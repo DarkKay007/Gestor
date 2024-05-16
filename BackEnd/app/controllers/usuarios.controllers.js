@@ -85,34 +85,33 @@ export const deleteUser = async (req, res) => {
   }
 };
 
-export const loginUser = async(req, res)=>{
-    
-  let email = req.body.email;
-  let password = req.body.password;
+export const loginUser = async (req, res) => {
+  const { email, password } = req.body;
 
   try {
-      let resultado = await pool.query(`
+      const resultado = await pool.query(`
       select email from usuarios
       where email = '${email}' and password = '${password}'
       `);
 
-      if (resultado[0]==""){
-          res.json({
-              respuesta:"user o password incorrecto",
-              estado:false
+      if (resultado[0] === "") {
+          res.status(401).json({
+              respuesta: "Usuario o contraseña incorrectos",
+              estado: false
           });
-      }else{
-          let token = tokenSign({
-              email:email,
-              password:password
+      } else {
+          const token = tokenSign({
+              email: email,
+              password: password
           });
 
           res.json({
-              respuesta:"login correcto",
-              estado:true,
-              token:token
+              respuesta: "Inicio de sesión exitoso",
+              estado: true,
+              token: token
           });
       }
+  
   } catch (error) {
       res.json({
         respuesta:"Error en el login",

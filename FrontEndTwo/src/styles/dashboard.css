@@ -1,0 +1,13 @@
+.container-dashboard{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 10% 8% 78%;
+    gap: 10px;
+}
+.main-dashboard,
+.nav-dashboard,
+.header-dashboard{
+    background-color: #333533;
+    padding: 10px;
+}

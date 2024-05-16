@@ -65,17 +65,10 @@ const UserList = () => {
     }
   };
   return (
-    <div className="dashboard">
-      <header className='dashboard-header'>
-        <h1>Lista De Usuarios</h1>
-      </header>
-      <nav className='dashboard-nav'>
-        <DashboardNav />
-      </nav>
-      <main className='dashboard-main'>
+   
         <UserListTable userList={userList} updateUser={updateUser} deleteUser={deleteUser} />
-      </main>
-    </div>
+   
+   
   );
 };
 

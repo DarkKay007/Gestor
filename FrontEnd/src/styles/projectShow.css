@@ -1,38 +1,42 @@
-.showProjectsTable {
-  width: 98%;
-  margin-top: 20px;
-  border-collapse: collapse;
-}
-th {
-  background-color: #66c7f4;
-  padding: 12px;
-  text-align: left;
-}
-
-td {
-  background-color: azure;
-  color: #000000;
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ccc; /* Borde inferior de las celdas */
-}
-/**
-** ProjectManagement
-*/
-.TitlePRojectManagement{
-  text-align: center;
-  font-size: 24px;
-  color: #000000;
-  font-weight: bolder;
-}
-.ContentProjectMAnagement {
+.dashboard-main-projectsShow{
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: 30% 60%;
-  gap: 20px;
-  justify-content: center;
+  background-color: #502F4C;
 }
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.project-card {
+  background-color: #C8B8DB;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+}
+
+.project-card h3 {
+  margin-top: 0;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.project-card p {
+  margin: 10px 0;
+  color: #666;
+}
+
+.project-card p strong {
+  color: #000;
+}
+
 /**
 *TODO:Estilo de la tabla de Project Management
 */

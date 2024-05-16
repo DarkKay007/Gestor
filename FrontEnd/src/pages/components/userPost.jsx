@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import DashboardNav from "./dashboard-nav";
 import Cookies from "js-cookie";
 import "../../styles/userPost.css";
-import { Alert } from "flowbite-react";
-
-
 
 const CreateUserForm = () => {
   const [user, setUser] = useState("");
@@ -41,22 +38,18 @@ const CreateUserForm = () => {
 
   return (
     <div className="dashboard">
-      <header className="dashboard-header">
-        <h1>Crear Usuario</h1>
-      </header>
       <nav className="dashboard-nav">
         <DashboardNav />
       </nav>
       <main className="dashboard-main">
-      
         <form onSubmit={handleSubmit}>
-        {message && (
-        <Alert color="warning" withBorderAccent>
-          <span className="font-medium">{message}</span>
-        </Alert>
-      )}
+          {message && (
+            <div className="alert">
+              <span className="font-medium">{message}</span>
+            </div>
+          )}
           <div>
-            <div className="userPost-Text" htmlFor="user">UserName:</div>
+            <label className="userPost-Text" htmlFor="user">UserName:</label>
             <input
               type="text"
               id="user"
@@ -66,7 +59,7 @@ const CreateUserForm = () => {
             />
           </div>
           <div>
-            <div className="userPost-Text" htmlFor="name">Nombre:</div>
+            <label className="userPost-Text" htmlFor="name">Nombre:</label>
             <input
               type="text"
               id="name"
@@ -76,7 +69,7 @@ const CreateUserForm = () => {
             />
           </div>
           <div>
-            <div className="userPost-Text" htmlFor="password">Contraseña:</div>
+            <label className="userPost-Text" htmlFor="password">Contraseña:</label>
             <input
               type="password"
               id="password"
@@ -86,7 +79,7 @@ const CreateUserForm = () => {
             />
           </div>
           <div>
-            <div className="userPost-Text" htmlFor="email">Email:</div>
+            <label className="userPost-Text" htmlFor="email">Email:</label>
             <input
               type="email"
               id="email"
@@ -96,20 +89,18 @@ const CreateUserForm = () => {
             />
           </div>
           <div>
-            <div className="userPost-Text" htmlFor="rol">Rol:</div>
+            <label className="userPost-Text" htmlFor="rol">Rol:</label>
             <select
               id="rol"
               value={rol}
               onChange={(e) => setRol(e.target.value)}
               required
             >
-              <option value="">Seleccionar Rol</option>{" "}
-              {/* Opción predeterminada */}
+              <option value="">Seleccionar Rol</option>
               <option value="Usuario">Usuario</option>
               <option value="Administrador">Administrador</option>
             </select>
           </div>
-
           <button type="submit">Crear Usuario</button>
         </form>
       </main>
