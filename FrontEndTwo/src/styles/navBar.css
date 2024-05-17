@@ -1,12 +1,9 @@
 .navBar-content{
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     display: flex;
-    padding-top: 10px;
+    
     align-items: center;
     justify-content: center;
-    font-size: xx-large;
-}
-.sidebar-link{
-    color: #ffc300;
+    
 }
