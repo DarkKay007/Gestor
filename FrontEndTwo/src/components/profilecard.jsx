@@ -35,7 +35,7 @@ export function ProfileCard({ user }) {
         <div className="flex flex-col items-center pb-10">
           <img
             alt={user.name}
-            src={"https://esports.as.com/2020/01/07/Vegetta.png?hash=619afe072e4d1934a50f2e7fd1c0911b51a74e2c"}
+            src={"https://cdn-icons-png.freepik.com/256/4140/4140037.png?semt=ais_hybrid"}
             className="mb-3 h-24 w-24 rounded-full shadow-lg"
           />
           <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
@@ -52,14 +52,14 @@ export function ProfileCard({ user }) {
 
       {/* Modal para Eliminar */}
       <Modal show={openDeleteModal} className='bg-gray-0 ' size="md"    onClose={() => setOpenDeleteModal(false)} popup>
-        <Modal.Header className='text-red-900'/>
+        <Modal.Header className='text-red-900 bg-gray-700' />
         <Modal.Body>
-          <div className="text-center ">
+          <div className="text-center bg-gray-700">
             <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
             <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
               ¿Estás seguro que quieres eliminar este usuario?
             </h3>
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-4 absolute translate-y-1/2 translate-x-1/2 bottom-0 right-1/2">
               <Button className='focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900' onClick={handleDelete}>
                 Sí, estoy seguro
               </Button>
@@ -73,9 +73,9 @@ export function ProfileCard({ user }) {
 
       {/* Modal para Cambiar Rol */}
       <Modal show={openRoleModal} className='bg-gray-0' size="md" onClose={() => setOpenRoleModal(false)} popup>
-        <Modal.Header />
+        <Modal.Header className='bg-gray-200' />
         <Modal.Body>
-          <div className="text-center ">
+          <div className="text-center bg-gray-200">
             <h3 className="mb-5 text-lg font-normal text-gray-900 dark:text-gray-900">
               Cambiar Rol de Usuario
             </h3>

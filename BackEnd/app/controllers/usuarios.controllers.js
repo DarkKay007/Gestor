@@ -1,5 +1,7 @@
-import { pool } from "../config/bd-mysql.js";
-import { tokenSign } from "../middlewares/usuarios.middlewares.js";
+import { tokenSign } from '../middlewares/usuarios.middlewares.js';
+import mysql from 'mysql2/promise';
+import { config } from 'dotenv';
+config();
 import { getCurrentDateTime } from "../util/dateHelper.js ";
 
 export const getUser = async (req, res) => {
@@ -84,40 +86,34 @@ export const deleteUser = async (req, res) => {
      .json({ error: error.message, message: "Error al eliminar usuario" });
   }
 };
-
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-      const resultado = await pool.query(`
-      select email from usuarios
-      where email = '${email}' and password = '${password}'
-      `);
+    const [rows] = await pool.query(
+      `SELECT email FROM usuarios WHERE email = ? AND password = ?`,
+      [email, password]
+    );
 
-      if (resultado[0] === "") {
-          res.status(401).json({
-              respuesta: "Usuario o contraseña incorrectos",
-              estado: false
-          });
-      } else {
-          const token = tokenSign({
-              email: email,
-              password: password
-          });
+    if (rows.length === 0) {
+      res.status(401).json({
+        respuesta: 'Usuario o contraseña incorrectos',
+        estado: false,
+      });
+    } else {
+      const token = tokenSign({ email, password });
 
-          res.json({
-              respuesta: "Inicio de sesión exitoso",
-              estado: true,
-              token: token
-          });
-      }
-  
-  } catch (error) {
       res.json({
-        respuesta:"Error en el login",
-        type:error,
-        
-      })
-        console.log(error)
+        respuesta: 'Inicio de sesión exitoso',
+        estado: true,
+        token,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      respuesta: 'Error en el login',
+      type: error,
+    });
+    console.error(error);
   }
-}
+};

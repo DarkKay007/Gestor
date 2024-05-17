@@ -35,11 +35,11 @@ const ProjectForm = ({ token, onProjectCreated }) => {
   };
 
   return (
-    <div className="FormProjectManagement">
+    <div className="FormProjectManagement ">
       <span className="TitlePRojectManagement">Cree un nuevo Proyecto</span>
-      <form className="form-container">
+      <form className="form-container  flex space-x-5">
         <input
-          className="form-input"
+          className="form-input bg-gray-700"
           type="text"
           name="Nombre"
           placeholder="Nombre del proyecto"
@@ -47,7 +47,7 @@ const ProjectForm = ({ token, onProjectCreated }) => {
           onChange={handleChange}
         />
         <input
-          className="form-input"
+          className="form-input bg-gray-700"
           type="text"
           name="Descripcion"
           placeholder="Descripción del proyecto"
@@ -55,22 +55,21 @@ const ProjectForm = ({ token, onProjectCreated }) => {
           onChange={handleChange}
         />
         <input
-          className="form-input"
+          className="form-input bg-gray-700"
           type="date"
           name="FechaInicio"
           value={formData.FechaInicio}
           onChange={handleChange}
         />
         <input
-          className="form-input"
+          className="form-input bg-gray-700"
           type="date"
           name="FechaFin"
           value={formData.FechaFin}
           onChange={handleChange}
         />
         <Button
-          outline
-          gradientDuoTone="purpleToPink"
+        className="bg-green-700"
           type="button"
           onClick={handleCreateProject}
         >

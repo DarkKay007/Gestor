@@ -3,49 +3,18 @@
     flex-direction: column;
     gap: 20px;
     padding: 20px;
-    width: fit-content;
-    height: fit-content;
-    
-  }
-  
-  .FormProjectManagement,
-  .ListProjectManagement {
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    color: black;
-  }
-  
-  .TitlePRojectManagement {
-    font-size: 1.5em;
-    color: black;
-    margin-bottom: 20px;
-  }
-  
-  .form-container {
-    display: flex;
-    color: black;
-    flex-direction: column;
-    
-    gap: 10px;
-  }
-  
-  .form-input {
-    padding: 10px;
-    color: black;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
-  }
-  
-  .tableProjectManagement {
-    color: black;
     width: 100%;
+    height: 100%; 
   }
+
+  .cardProjects
+{
+  display: grid;
+  grid-template-rows: 80% 20%;
   
-  .flex {
-    display: flex;
-    color: black;
-    justify-content: center;
-    margin-top: 20px;
-  }
   
+}
+.ButtonCardProjects{
+  bottom: 0px;
+  
+}

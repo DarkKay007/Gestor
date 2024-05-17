@@ -9,8 +9,7 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [userList, setUserList] = useState([]);
   const [message, setMessage] = useState("");
-
-  const token = Cookies.get('token');
+  const [token, setToken] = useState(Cookies.get('token') || "");
 
   // Método para obtener la lista de usuarios
   const fetchUserList = async () => {
@@ -110,8 +109,31 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  // Método para autenticar un usuario
+  const loginUser = async (email, password) => {
+    try {
+      const response = await axios.post('http://localhost:666/api/login', { email, password });
+      const newToken = response.data.token;
+      Cookies.set('token', newToken);
+      setToken(newToken);
+      setMessage("Inicio de sesión exitoso");
+      fetchUserList();
+    } catch (error) {
+      console.error('Error logging in:', error);
+      setMessage("Error al iniciar sesión. Por favor, verifica tus credenciales.");
+    }
+  };
+
+  // Método para cerrar sesión
+  const logoutUser = () => {
+    Cookies.remove('token');
+    setToken("");
+    setUserList([]);
+    setMessage("Sesión cerrada");
+  };
+
   return (
-    <UserContext.Provider value={{ userList, createUser, updateUser, deleteUser, message }}>
+    <UserContext.Provider value={{ userList, createUser, updateUser, deleteUser, loginUser, logoutUser, message, token }}>
       {children}
     </UserContext.Provider>
   );

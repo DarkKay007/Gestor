@@ -40,7 +40,6 @@ const Login = () => {
 
             if (response.ok) {
                 setIsLoggedIn(true);
-                Cookies.set('token', data.token, { expires: 1 });
             } else {
                 setError(data.respuesta); // Mostrar mensaje de error del servidor
             }

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from "../routes/Links";
 import { Button } from "flowbite-react";
 export default function Page404() {
