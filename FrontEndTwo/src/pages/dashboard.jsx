@@ -8,14 +8,17 @@ function Dashboard() {
       <>
         <div className="container-dashboard">
             <div className="header-dashboard">
+        
                 <div className="ico-dashboard"></div>
-                <h1>Home    </h1>
+                <h1>Dashboard</h1>
                 <div className="settings-dashboard"><h1><IoSettings /></h1></div>
             </div>
             <div className="nav-dashboard">
                 <NavLinks></NavLinks>
             </div>
-            <div className="main-dashboard"></div>
+            <div className="main-dashboard">
+              <center>datos</center>
+            </div>
         </div>
       </>
     )

@@ -9,9 +9,11 @@ export function Router ({ routes = [], defaultComponent: DefaultComponent = Page
         const onLocationChange = () => {
             setCurrentPath(window.location.pathname);
         };
+        window.addEventListener('pushState', onLocationChange);
         window.addEventListener('popstate', onLocationChange);
         
         return () => {
+            window.removeEventListener('pushState', onLocationChange);
             window.removeEventListener('popstate', onLocationChange);
         };
     }, []);

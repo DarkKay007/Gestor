@@ -1,18 +1,15 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useAuth } from './authContext';
 
-// Crear el contexto
 const UserContext = createContext();
 
-// Crear un proveedor de contexto
 export const UserProvider = ({ children }) => {
+  const { token, setIsLoggedIn } = useAuth();
   const [userList, setUserList] = useState([]);
   const [message, setMessage] = useState("");
 
-  const token = Cookies.get('token');
-
-  // Método para obtener la lista de usuarios
   const fetchUserList = async () => {
     if (!token) {
       setMessage("Token no disponible. Por favor, inicia sesión.");
@@ -37,23 +34,19 @@ export const UserProvider = ({ children }) => {
     fetchUserList();
   }, [token]);
 
-  // Método para crear un nuevo usuario
-  const createUser = async ({ user, name, password, email, rol }) => {
+  const createUser = async (user) => {
     if (!token) {
       setMessage("Token no disponible. Por favor, inicia sesión.");
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:666/api/usuario', {
-        user, name, password, email, rol
-      }, {
+      const response = await axios.post('http://localhost:666/api/usuario', user, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
       });
-
       setUserList([...userList, response.data]);
       setMessage("Usuario creado con éxito");
     } catch (error) {
@@ -62,7 +55,6 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  // Método para actualizar un usuario
   const updateUser = async (id, updatedUser) => {
     if (!token) {
       setMessage("Token no disponible. Por favor, inicia sesión.");
@@ -86,7 +78,6 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  // Método para eliminar un usuario
   const deleteUser = async (id) => {
     if (!token) {
       setMessage("Token no disponible. Por favor, inicia sesión.");
@@ -110,14 +101,33 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const loginUser = async (email, password) => {
+    try {
+      const response = await axios.post('http://localhost:666/api/login', { email, password });
+      const newToken = response.data.token;
+      Cookies.set('token', newToken);
+      setIsLoggedIn(true);
+      fetchUserList();
+    } catch (error) {
+      console.error('Error logging in:', error);
+      setMessage("Error al iniciar sesión. Por favor, verifica tus credenciales.");
+    }
+  };
+
+  const logoutUser = () => {
+    Cookies.remove('token');
+    setIsLoggedIn(false);
+    setUserList([]);
+    setMessage("Sesión cerrada");
+  };
+
   return (
-    <UserContext.Provider value={{ userList, createUser, updateUser, deleteUser, message }}>
+    <UserContext.Provider value={{ userList, createUser, updateUser, deleteUser, loginUser, logoutUser, message }}>
       {children}
     </UserContext.Provider>
   );
 };
 
-// Hook para usar el contexto
 export const useUser = () => {
   return useContext(UserContext);
 };

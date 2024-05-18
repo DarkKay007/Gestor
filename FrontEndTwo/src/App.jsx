@@ -1,10 +1,12 @@
 import routes from "./routes/path"
 import { Router } from "./routes/routes"
 import React from 'react';
-function App() {
+
+const App = () => {
 
   return (
     <>
+    
   <Router routes={routes}  />
     </>
   )

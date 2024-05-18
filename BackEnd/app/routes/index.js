@@ -1,14 +1,14 @@
-import express from 'express';
-import { Router } from 'express'; // Asegúrate de importar Router desde express
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
+import express from "express";
+import { Router } from "express"; // Importa Router desde express
+import cookieParser from "cookie-parser";
+import cors from "cors";
 /**
  * !Importaciones de las rutas de los Usuarios
  */
-import routerUser from './usuarios.routes.js';
-import routerProjects from './projects.routes.js';
-import routerTareas from './tareas.routes.js';
-import routerAsignaciones from './asignaciones.routes.js';
+import routerUser from "./usuarios.routes.js";
+import routerProjects from "./projects.routes.js";
+import routerTareas from "./tareas.routes.js";
+import routerAsignaciones from "./asignaciones.routes.js";
 
 const app = express();
 const route = Router(); // Crea una instancia de Router
@@ -19,14 +19,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-route.use("/api",routerTareas)
+route.use("/api", routerTareas);
 route.use("/api", routerUser);
 route.use("/api", routerProjects);
 route.use("/api", routerAsignaciones);
 
-
 // Ruta que utiliza cookies
-route.get('/api', (req, res) => {
+route.get("/api", (req, res) => {
   // Acceder a una cookie llamada "miCookie"
   const miCookie = req.cookies.miCookie;
   // Hacer algo con la cookie...

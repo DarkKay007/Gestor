@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { 
-    UserList, 
+    userList, 
     deleteUser, 
     getUser, 
     loginUser, 
@@ -13,12 +13,12 @@ const routerUser = Router();
 
 routerUser.post("/login", loginUser);
 
-routerUser.get("/usuario", validarPermiso, UserList);
-routerUser.post("/usuario", validarPermiso, postUser);
-routerUser.put("/usuario", validarPermiso, putUser);
-routerUser.delete("/usuario", validarPermiso, deleteUser);
-routerUser.get("/usuario/:id", validarPermiso, getUser);
-routerUser.put("/usuario/:id", validarPermiso, putUser);
-routerUser.delete("/usuario/:id", validarPermiso, deleteUser);
+routerUser.get("/usuario",  userList);
+routerUser.post("/usuario",  postUser);
+routerUser.put("/usuario",  putUser);
+routerUser.delete("/usuario",  deleteUser);
+routerUser.get("/usuario/:id",  getUser);
+routerUser.put("/usuario/:id",  putUser);
+routerUser.delete("/usuario/:id",  deleteUser);
 
 export default routerUser;
