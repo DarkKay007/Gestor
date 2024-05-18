@@ -36,7 +36,7 @@ const ProjectForm = ({ token, onProjectCreated }) => {
 
   return (
     <div className="FormProjectManagement ">
-      <span className="TitlePRojectManagement">Cree un nuevo Proyecto</span>
+      <span className="TitlePRojectManagement text-4xl bg-green-900 px-1 py-1 rounded-xl">Cree un nuevo Proyecto</span>
       <form className="form-container  flex space-x-5">
         <input
           className="form-input bg-gray-700"
