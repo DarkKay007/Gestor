@@ -1,18 +1,63 @@
 import { FaHome } from "react-icons/fa";
-import { Link } from "../routes/Links";
+import { Link } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
-import { Button } from "flowbite-react";
+import { Button, Modal } from "flowbite-react";
 import { useAuth } from '../context/authContext';
-import { useUser } from '../context/userContext';
+import { useUser } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 import "../styles/LoginPage.css";
+
+const LoginForm = ({ onSubmit, setEmail, setPassword, email, password, error, message }) => (
+  <div className='login-form-container'>
+    <h2>Iniciar sesión en Kuro Gestor</h2>
+    {error && <p className="error-message">{error}</p>}
+    {message && <p className="error-message">{message}</p>}
+    <form onSubmit={onSubmit}>
+      <div className="mb-3">
+        <label htmlFor="email" className="form-label">Correo Electrónico</label>
+        <input type="email" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="password" className="form-label">Contraseña</label>
+        <input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      </div>
+      <div className="form-check mb-3">
+        <input type="checkbox" className="form-check-input" id="rememberMe" />
+        <label className="form-check-label" htmlFor="rememberMe">Recordarme</label>
+      </div>
+      <button type="submit" className="button-submit">Iniciar Sesión</button>
+    </form>
+  </div>
+);
+
+const RegisterForm = ({ onSubmit, setEmail, setPassword, email, password, error, message }) => (
+  <div className='login-form-container'>
+    <h2>Registrarse en Kuro Gestor</h2>
+    {error && <p className="error-message">{error}</p>}
+    {message && <p className="error-message">{message}</p>}
+    <form onSubmit={onSubmit}>
+      <div className="mb-3">
+        <label htmlFor="email" className="form-label">Correo Electrónico</label>
+        <input type="email" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="password" className="form-label">Contraseña</label>
+        <input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      </div>
+      <button type="submit" className="button-submit">Registrarse</button>
+    </form>
+  </div>
+);
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isRegistering, setIsRegistering] = useState(false);
   const { isLoggedIn, handleLogout } = useAuth();
-  const { loginUser, message } = useUser();
+  const { loginUser, registerUser, message } = useUser();
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -20,71 +65,88 @@ const Login = () => {
     }
   }, [isLoggedIn]);
 
-  const handleSubmit = async (event) => {
+  const handleSubmitLogin = async (event) => {
     event.preventDefault();
     try {
       await loginUser(email, password);
+      navigate('/dashboard');
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
       setError('Error al iniciar sesión. Por favor, intenta de nuevo.');
     }
   };
 
+  const handleSubmitRegister = async (event) => {
+    event.preventDefault();
+    try {
+      await registerUser(email, password);
+    } catch (error) {
+      console.error('Error al registrarse:', error);
+      setError('Error al registrarse. Por favor, intenta de nuevo.');
+    }
+  };
+
+  const toggleRegister = () => {
+    setIsRegistering(!isRegistering);
+  };
+
   return (
-    <div className="login-container flex text-gray-800">
-      <div className='login-container-form'>
-        <h2>Iniciar sesión en Kuro Gestor</h2>
-        {error && <p className="error-message text-gray-800">{error}</p>}
-        {message && <p className="error-message text-gray-800">{message}</p>}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">Correo Electrónico</label>
-            <input type="email" className="form-control text-gray-800" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e) => setEmail(e.target.value)} />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
-            <input type="password" className="form-control text-gray-800" id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)} />
-          </div>
-          <button type="submit" className="Button-Sing-In">Iniciar Sesión</button>
-        </form>
-      </div>
-      {showModal && (
-        <div id="default-modal" tabIndex="-1" aria-hidden="true" className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-          <div className="relative p-4 w-full w-2xl h-screen h-full">
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Bienvenido, Usuario!
-                </h3>
-                <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" onClick={() => setShowModal(false)}>
-                  <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                  </svg>
-                  <span className="sr-only">Close modal</span>
-                </button>
-              </div>
-              <div className="p-4 md:p-5 space-y-4">
-                <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                  Para continuar, haz clic en el botón de abajo para ir al panel de control.
-                </p>
-              </div>
-              <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <Link
-                  to={"/dashboard"}
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Ir al Panel de Control
-                </Link>
-                <button type="button" className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" onClick={handleLogout}>
-                  Cerrar Sesión
-                </button>
-              </div>
-            </div>
-          </div>
+    <div className="login-page">
+      {!isLoggedIn ? (
+        <div className='login-container-form'>
+          {isRegistering ? (
+            <RegisterForm
+              onSubmit={handleSubmitRegister}
+              setEmail={setEmail}
+              setPassword={setPassword}
+              email={email}
+              password={password}
+              error={error}
+              message={message}
+            />
+          ) : (
+            <LoginForm
+              onSubmit={handleSubmitLogin}
+              setEmail={setEmail}
+              setPassword={setPassword}
+              email={email}
+              password={password}
+              error={error}
+              message={message}
+            />
+          )}
+          <p className="mt-3">
+            {isRegistering ? '¿Ya tienes una cuenta?' : '¿No tienes una cuenta?'}{' '}
+            <span className="link" onClick={toggleRegister}>
+              {isRegistering ? 'Iniciar Sesión' : 'Registrarse'}
+            </span>
+          </p>
         </div>
+      ) : (
+        <Modal show={isLoggedIn} size="md" onClose={() => setShowModal(false)}>
+          <Modal.Header>Bienvenido, Usuario!</Modal.Header>
+          <Modal.Body>
+            <div className="flex flex-col items-center">
+              <Link to="/dashboard" className="button-link">
+                <FaHome /> Ir al Panel de Control
+              </Link>
+              <Button outline gradientDuoTone="pinkToOrange" onClick={handleLogout}>
+                Cerrar Sesión
+              </Button>
+            </div>
+          </Modal.Body>
+        </Modal>
+      )}
+      {!isLoggedIn && (
+        <Modal show={showModal} onClose={() => setShowModal(false)} size="md">
+          <Modal.Header>Login Incorrecto</Modal.Header>
+          <Modal.Body>
+            <p>Tu sesión ha expirado o tus credenciales son incorrectas. Por favor, inicia sesión nuevamente.</p>
+            <Button onClick={() => setShowModal(false)}>Cerrar</Button>
+          </Modal.Body>
+        </Modal>
       )}
     </div>
-
   );
 }
 

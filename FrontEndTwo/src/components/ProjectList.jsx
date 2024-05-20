@@ -44,43 +44,51 @@ const ProjectList = ({
       console.error("Error deleting project:", error);
     }
   };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+  
 
- const handleEditButtonClick = (project) => {
-  setProjectToEdit(project);
-  setEditForm({
-    Nombre: project.Nombre,
-    Descripcion: project.Descripcion,
-    FechaInicio: project.FechaInicio,
-    FechaFin: project.FechaFin,
-  });
-  setOpenEditModal(true);
-};
+  const handleEditButtonClick = (project) => {
+    setEditForm({
+      ID: project.ID,
+      Nombre: project.Nombre,
+      Descripcion: project.Descripcion,
+      FechaInicio: formatDate(project.FechaInicio),
+      FechaFin: formatDate(project.FechaFin),
+    });
+    setOpenEditModal(true);
+  };
+  
 
-const handleEditFormChange = (e) => {
-  const { name, value } = e.target;
-  setEditForm(prevState => ({ ...prevState, [name]: value }));
-};
+  const handleEditFormChange = (e) => {
+    const { name, value } = e.target;
+    setEditForm((prevState) => ({ ...prevState, [name]: value }));
+  };
 
-const handleConfirmEdit = async () => {
-  try {
-    await axios.put(
-      `http://localhost:666/api/projects/${projectToEdit.ID}`,
-      editForm,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    onProjectUpdated(); // Esto debería actualizar la lista de proyectos después de la edición
-    setOpenEditModal(false);
-    setProjectToEdit(null);
-  } catch (error) {
-    console.error("Error updating project:", error);
-  }
-};
-
+  const handleConfirmEdit = async () => {
+    try {
+      await axios.put(
+        `http://localhost:666/api/projects/${projectToEdit}`,
+        editForm,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      onProjectUpdated();
+      setOpenEditModal(false);
+      setProjectToEdit(null);
+    } catch (error) {
+      console.error("Error updating project:", error);
+    }
+  };
 
   const usersPerPage = 4;
   const indexOfLastUser = currentPage * usersPerPage;

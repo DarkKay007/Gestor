@@ -16,6 +16,7 @@ function Dashboard() {
             <div className="nav-dashboard">
                 <NavLinks></NavLinks>
             </div>
+            <div className="main-dashboard-settings"></div>
             <div className="main-dashboard">
               <center>datos</center>
             </div>

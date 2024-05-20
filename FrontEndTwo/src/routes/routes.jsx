@@ -1,29 +1,19 @@
-import { match } from 'path-to-regexp';
-import { useState, useEffect } from "react";
-import Page404 from "../pages/404";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import LoginPage from '../pages/pageLogin';
+import Dashboard from '../pages/dashboard';
+import DashboardUsers from '../pages/dashboardUsers';
+import DashboardProject from '../pages/dashboardProjects';
 
-export function Router ({ routes = [], defaultComponent: DefaultComponent = Page404 }) {
-    const [currentPath, setCurrentPath] = useState(window.location.pathname);
-    
-    useEffect(() => {  
-        const onLocationChange = () => {
-            setCurrentPath(window.location.pathname);
-        };
-        window.addEventListener('pushState', onLocationChange);
-        window.addEventListener('popstate', onLocationChange);
-        
-        return () => {
-            window.removeEventListener('pushState', onLocationChange);
-            window.removeEventListener('popstate', onLocationChange);
-        };
-    }, []);
+const AppRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/dashboard/UserList" element={<DashboardUsers />} />
+      <Route path="/dashboard/ProjectManagement" element={<DashboardProject />} />
+    </Routes>
+  );
+};
 
-    const matchedRoute = routes.find(({ path }) => {
-        const matchUrl = match(path, { decode: decodeURIComponent });
-        return matchUrl(currentPath);
-    });
-
-    const RenderComponent = matchedRoute ? matchedRoute.component : DefaultComponent;
-
-    return <RenderComponent />;
-}
+export default AppRoutes;

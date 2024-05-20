@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "../routes/Links";
 import { Button } from "flowbite-react";
 export default function Page404() {
   return (
@@ -13,7 +12,7 @@ export default function Page404() {
         <p>Lo siento, la página que estás buscando no se pudo encontrar.</p>
         <div className="Button404">
           <Button outline gradientDuoTone="pinkToOrange">
-            <Link to="/">Volver al inicio</Link>
+            <link to="/">Volver al inicio</link>
           </Button>
         </div>
       </div>

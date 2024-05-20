@@ -6,33 +6,42 @@ import { useAuth } from './authContext';
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const { token, setIsLoggedIn } = useAuth();
+  const { token, setToken, setIsLoggedIn } = useAuth();
   const [userList, setUserList] = useState([]);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const fetchUserList = async () => {
-    if (!token) {
+  useEffect(() => {
+    const storedToken = Cookies.get('token');
+    if (storedToken) {
+      setToken(storedToken);
+      fetchUserList(storedToken);
+    }
+  }, [setToken]);
+
+  const fetchUserList = async (currentToken = token) => {
+    if (!currentToken) {
       setMessage("Token no disponible. Por favor, inicia sesión.");
       return;
     }
 
     try {
+      setLoading(true);
       const response = await axios.get('http://localhost:666/api/usuario', {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${currentToken}`,
         },
       });
       setUserList(response.data);
+      setLoading(false);
     } catch (error) {
       console.error('Error fetching UserList:', error);
-      setMessage("Error al obtener la lista de usuarios. Por favor, intenta de nuevo.");
+      setError("Error al obtener la lista de usuarios. Por favor, intenta de nuevo.");
+      setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchUserList();
-  }, [token]);
 
   const createUser = async (user) => {
     if (!token) {
@@ -51,7 +60,7 @@ export const UserProvider = ({ children }) => {
       setMessage("Usuario creado con éxito");
     } catch (error) {
       console.error('Error creating user:', error);
-      setMessage("Error al crear usuario. Por favor, intenta de nuevo.");
+      setError("Error al crear usuario. Por favor, intenta de nuevo.");
     }
   };
 
@@ -74,7 +83,7 @@ export const UserProvider = ({ children }) => {
       setMessage("Usuario actualizado con éxito");
     } catch (error) {
       console.error('Error updating user:', error);
-      setMessage("Error al actualizar usuario. Por favor, intenta de nuevo.");
+      setError("Error al actualizar usuario. Por favor, intenta de nuevo.");
     }
   };
 
@@ -97,7 +106,7 @@ export const UserProvider = ({ children }) => {
       setMessage("Usuario eliminado con éxito");
     } catch (error) {
       console.error('Error deleting user:', error);
-      setMessage("Error al eliminar usuario. Por favor, intenta de nuevo.");
+      setError("Error al eliminar usuario. Por favor, intenta de nuevo.");
     }
   };
 
@@ -106,23 +115,26 @@ export const UserProvider = ({ children }) => {
       const response = await axios.post('http://localhost:666/api/login', { email, password });
       const newToken = response.data.token;
       Cookies.set('token', newToken);
+      setToken(newToken);
       setIsLoggedIn(true);
-      fetchUserList();
+      fetchUserList(newToken);
+      setMessage("Inicio de sesión exitoso");
     } catch (error) {
       console.error('Error logging in:', error);
-      setMessage("Error al iniciar sesión. Por favor, verifica tus credenciales.");
+      setError("Error al iniciar sesión. Por favor, verifica tus credenciales.");
     }
   };
 
   const logoutUser = () => {
     Cookies.remove('token');
+    setToken(null);
     setIsLoggedIn(false);
     setUserList([]);
     setMessage("Sesión cerrada");
   };
 
   return (
-    <UserContext.Provider value={{ userList, createUser, updateUser, deleteUser, loginUser, logoutUser, message }}>
+    <UserContext.Provider value={{ userList, createUser, updateUser, deleteUser, loginUser, logoutUser, message, loading, error }}>
       {children}
     </UserContext.Provider>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from '../components/login'; // Asegúrate de importar el componente Login desde la ubicación correcta
+import Login from '../components/login';
 import '../styles/LoginPage.css'; // Importa el archivo de estilos CSS
 
 const LoginPage = () => {

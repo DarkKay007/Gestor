@@ -2,11 +2,11 @@ import { FaHome } from "react-icons/fa";
 import { PiUserListBold } from "react-icons/pi";
 import { GrProjects } from "react-icons/gr";
 import { IoLogIn } from "react-icons/io5";
+import {Link} from "react-router-dom"
 /**
  * ! Iconos
  */
 import React from "react";
-import { Link } from "../routes/Links";
 import "../styles/navBar.css";
 const NavLinks = () => {
   return (

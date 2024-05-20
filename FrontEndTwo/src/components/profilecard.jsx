@@ -1,14 +1,14 @@
-// src/components/ProfileCard.jsx
 import React, { useState } from 'react';
 import { Card, Dropdown, Button, Modal } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { useUser } from '../context/UserContext';
 
+
 export function ProfileCard({ user }) {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openRoleModal, setOpenRoleModal] = useState(false);
   const [newRole, setNewRole] = useState(user.rol);
-  const { deleteUser, updateUser } = useUser();
+  const { deleteUser, updateUser, createUser } = useUser();
 
   const handleDelete = () => {
     deleteUser(user.id);
@@ -19,6 +19,8 @@ export function ProfileCard({ user }) {
     updateUser(user.id, { ...user, rol: newRole });
     setOpenRoleModal(false);
   };
+
+
 
   return (
     <>
@@ -51,8 +53,8 @@ export function ProfileCard({ user }) {
         </div>
       </Card>
 
-      {/* Modal para Eliminar */}
-      <Modal show={openDeleteModal} size="md" onClose={() => setOpenDeleteModal(false)} popup>
+
+      <Modal show={openDeleteModal} size="md" className='' onClose={() => setOpenDeleteModal(false)} popup>
         <Modal.Header />
         <Modal.Body>
           <div className="text-center">
@@ -84,7 +86,7 @@ export function ProfileCard({ user }) {
               <select
                 value={newRole}
                 onChange={(e) => setNewRole(e.target.value)}
-                className="form-select mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-900"
+                className="form-select mt-1 block w-full py-2 px-3 border text-gray-900 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-900"
               >
                 <option value="Usuario">Usuario</option>
                 <option value="Administrador">Administrador</option>
@@ -96,6 +98,8 @@ export function ProfileCard({ user }) {
           </div>
         </Modal.Body>
       </Modal>
+
+    
     </>
   );
 }
