@@ -35,10 +35,11 @@ export function ProfileCard({ user }) {
             </Dropdown.Item>
           </Dropdown>
         </div>
+        <div className="w-3 h-3">ID:{user.id}</div>
         <div className="flex flex-col items-center pb-10">
           <img
             alt={user.name}
-            src="https://cdn-icons-png.freepik.com/256/4140/4140037.png?semt=ais_hybrid"
+            src={`https://unavatar.io/github/${user.user}`}
             className="mb-3 h-24 w-24 rounded-full shadow-lg"
           />
           <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">

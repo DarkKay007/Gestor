@@ -3,7 +3,7 @@ import { Modal, Button, Dropdown } from "flowbite-react";
 import { IoSettings } from "react-icons/io5";
 import NavLinks from "../components/nav-links";
 import UserList from "../components/userList";
-import { useUser } from "../context/UserContext";
+import { useUser } from "../context/userContext";
 import "../styles/dashboard.css";
 
 function DashboardUsers() {
