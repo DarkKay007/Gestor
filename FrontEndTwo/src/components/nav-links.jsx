@@ -35,6 +35,12 @@ const NavLinks = () => {
       >
         <GrProjects />
       </Link>
+      <Link
+        to={"/dashboard/Task"}
+        className="sidebar-link px-4 py-2 text-2x2  text-yellow-400  border-t border-b border-gray-200 hover:bg-gray-700 hover:text-red-700 focus:z-10 focus:ring-2 focus:ring-red-700 focus:text-red-700 "
+      >
+        <GrProjects />
+      </Link>
     </div>
   );
 };
