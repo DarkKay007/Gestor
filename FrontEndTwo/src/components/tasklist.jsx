@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTasks, deleteTask } from '../store/taskSlice';
-import TaskForm from './TaskForm';
 import '../styles/taskList.css'; // Importar el archivo CSS para estilos específicos de TaskList
 
 const TaskList = () => {
@@ -26,7 +25,7 @@ const TaskList = () => {
     content = <div>Loading...</div>;
   } else if (taskStatus === 'succeeded') {
     content = tasks.map(task => (
-      <div key={task.ID} className="task-card">
+      <div key={task.ID} className="task-card"> {/* Agregar key única aquí */}
         <h3>{task.Nombre}</h3>
         <p>{task.Descripcion}</p>
         <button onClick={() => handleDelete(task.ID)}>Delete</button>
@@ -38,11 +37,9 @@ const TaskList = () => {
 
   return (
     <div className="task-list">
-      <TaskForm />
       {content}
     </div>
   );
 };
 
 export default TaskList;
-  

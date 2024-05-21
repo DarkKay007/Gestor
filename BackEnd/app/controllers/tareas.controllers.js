@@ -62,11 +62,21 @@ export const updateTask = async (req, res) => {
 };
 
 // Eliminar una tarea
+
 export const deleteTask = async (req, res) => {
-  const ID = req.body.ID;
+  const { ID } = req.body; // Desestructuramos ID del cuerpo de la solicitud
+
+  if (!ID) {
+    return res.status(400).json({ message: "ID de tarea no proporcionado" });
+  }
 
   try {
-    await pool.query("DELETE FROM tareas WHERE ID = ?", [ID]);
+    const [result] = await pool.query("DELETE FROM tareas WHERE ID = ?", [ID]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Tarea no encontrada" });
+    }
+
     res.json({ message: "Tarea eliminada exitosamente" });
   } catch (error) {
     res.status(500).json({ error: error.message, message: "Error al eliminar tarea" });

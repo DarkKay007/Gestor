@@ -7,7 +7,6 @@ const initialState = {
   error: null,
 };
 
-// Thunks para realizar acciones asincrónicas
 export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async () => {
   const response = await axios.get('http://localhost:666/api/tasks');
   return response.data;
@@ -24,7 +23,7 @@ export const updateTask = createAsyncThunk('tasks/updateTask', async (updatedTas
 });
 
 export const deleteTask = createAsyncThunk('tasks/deleteTask', async (taskId) => {
-  await axios.delete('http://localhost:666/api/tasks', { data: { ID: taskId } });
+  const response = await axios.delete('http://localhost:666/api/tasks', { data: { ID: taskId } });
   return taskId;
 });
 

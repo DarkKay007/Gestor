@@ -1,6 +1,6 @@
 import NavLinks from "../components/nav-links";
 import { IoSettings } from "react-icons/io5";
-
+import TaskForm from '../components/taskform';
 import TaskList from "../components/tasklist";
 import "../styles/dashboard.css"
 function DashboardTask() {
@@ -17,7 +17,9 @@ function DashboardTask() {
             <div className="nav-dashboard">
                 <NavLinks></NavLinks>
             </div>
-            <div className="main-dashboard-settings"></div>
+            <div className="main-dashboard-settings">
+              <TaskForm/>
+            </div>
             <div className="main-dashboard">
               <TaskList></TaskList>
             </div>

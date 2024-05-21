@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Dropdown, Button, Modal } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { useUser } from '../context/UserContext';
+import { useUser } from '../context/userContext';
 
 
 export function ProfileCard({ user }) {

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import { Button, Modal } from "flowbite-react";
 import { useAuth } from '../context/authContext';
-import { useUser } from '../context/UserContext';
+import { useUser } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
 import "../styles/LoginPage.css";
 
