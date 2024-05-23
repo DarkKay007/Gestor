@@ -18,8 +18,8 @@ const TaskForm = () => {
   const [proyectos, setProyectos] = useState([]);
 
   useEffect(() => {
-    // Llamada a la API para obtener los proyectos
-    fetch("http://localhost:666/api/projects") // Sustituir con la URL correcta de tu API
+  
+    fetch("http://localhost:666/api/projects") 
       .then((response) => response.json())
       .then((data) => setProyectos(data))
       .catch((error) => console.error("Error fetching projects:", error));
@@ -35,7 +35,7 @@ const TaskForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addTask(formData));
-    setModalOpen(false); // Cerrar el modal después de enviar el formulario
+    setModalOpen(false);
   };
 
   const toggleModal = () => {
@@ -44,15 +44,14 @@ const TaskForm = () => {
 
   return (
     <>
-      {/* Button to open the modal */}
       <button
+        
         onClick={toggleModal}
-        className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="block text-gray-900 bg-yellow-500 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
       >
-        Toggle modal
+        Crear tarea
       </button>
 
-      {/* Main modal */}
       {modalOpen && (
         <div
           id="crud-modal"
