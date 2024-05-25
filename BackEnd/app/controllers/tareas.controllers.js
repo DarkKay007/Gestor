@@ -64,7 +64,7 @@ export const updateTask = async (req, res) => {
 // Eliminar una tarea
 
 export const deleteTask = async (req, res) => {
-  const { ID } = req.body; // Desestructuramos ID del cuerpo de la solicitud
+  const ID = req.params.id;
 
   if (!ID) {
     return res.status(400).json({ message: "ID de tarea no proporcionado" });

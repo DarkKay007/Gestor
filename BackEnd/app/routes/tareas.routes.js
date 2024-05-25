@@ -6,7 +6,7 @@ const routerTareas = Router();
 routerTareas.get("/tasks/:id", getTaskById);
 routerTareas.get("/tasks", getAllTasks);
 routerTareas.post("/tasks", createTask);
-routerTareas.put("/tasks", updateTask);
-routerTareas.delete("/tasks", deleteTask);
+routerTareas.put("/tasks/:id", updateTask);
+routerTareas.delete("/tasks/:id", deleteTask);
 
 export default routerTareas;

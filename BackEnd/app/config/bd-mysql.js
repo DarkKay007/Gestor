@@ -1,6 +1,6 @@
 import { createPool } from "mysql2/promise";
 import { config } from "dotenv";
-config(); // Carga las variables de entorno desde el archivo .env
+config(); 
 
 export const pool = createPool({
     user: process.env.MYSQLUSER,

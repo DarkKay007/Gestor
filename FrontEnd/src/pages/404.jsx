@@ -1,6 +1,6 @@
-import { Link } from "./components/Links";
-import "../styles/404.css";
+import React from 'react';
 import { Button } from "flowbite-react";
+import { Link } from 'react-router-dom';
 export default function Page404() {
   return (
     <div className="contentPage404">
