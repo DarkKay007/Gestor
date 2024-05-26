@@ -1,10 +1,9 @@
-import { FaHome } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
+import { FaHome } from "react-icons/fa";
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Modal } from "flowbite-react";
-import { useAuth } from '../context/authContext';
-import { useUser } from '../context/userContext';
-import { useNavigate } from 'react-router-dom';
+import useAuthStore from '../store/authStore';
+import useUserStore from '../store/userStore';
 import "../styles/LoginPage.css";
 
 const LoginForm = ({ onSubmit, setEmail, setPassword, email, password, error, message }) => (
@@ -54,35 +53,25 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isRegistering, setIsRegistering] = useState(false);
-  const { isLoggedIn, handleLogout } = useAuth();
-  const { loginUser, registerUser, message } = useUser();
-  const [showModal, setShowModal] = useState(false);
+  const { isLoggedIn, login, logout, error: authError, message: authMessage, initializeAuth } = useAuthStore();
+  const { fetchUserList } = useUserStore();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      setShowModal(true);
+    initializeAuth();
+    if (isLoggedIn) {
+      fetchUserList();
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, initializeAuth, fetchUserList]);
 
   const handleSubmitLogin = async (event) => {
     event.preventDefault();
     try {
-      await loginUser(email, password);
+      await login(email, password);
       navigate('/dashboard');
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
       setError('Error al iniciar sesión. Por favor, intenta de nuevo.');
-    }
-  };
-
-  const handleSubmitRegister = async (event) => {
-    event.preventDefault();
-    try {
-      await registerUser(email, password);
-    } catch (error) {
-      console.error('Error al registrarse:', error);
-      setError('Error al registrarse. Por favor, intenta de nuevo.');
     }
   };
 
@@ -96,13 +85,13 @@ const Login = () => {
         <div className='login-container-form'>
           {isRegistering ? (
             <RegisterForm
-              onSubmit={handleSubmitRegister}
+              onSubmit={handleSubmitLogin} // Cambiar por registro cuando esté listo
               setEmail={setEmail}
               setPassword={setPassword}
               email={email}
               password={password}
-              error={error}
-              message={message}
+              error={authError}
+              message={authMessage}
             />
           ) : (
             <LoginForm
@@ -111,8 +100,8 @@ const Login = () => {
               setPassword={setPassword}
               email={email}
               password={password}
-              error={error}
-              message={message}
+              error={authError}
+              message={authMessage}
             />
           )}
           <p className="mt-3">
@@ -123,26 +112,26 @@ const Login = () => {
           </p>
         </div>
       ) : (
-        <Modal show={isLoggedIn} size="md" onClose={() => setShowModal(false)}>
+        <Modal show={isLoggedIn} size="md" onClose={() => logout()}>
           <Modal.Header>Bienvenido, Usuario!</Modal.Header>
           <Modal.Body>
             <div className="flex flex-col items-center">
               <Link to="/dashboard" className="button-link">
                 <FaHome /> Ir al Panel de Control
               </Link>
-              <Button outline gradientDuoTone="pinkToOrange" onClick={handleLogout}>
+              <Button outline gradientDuoTone="pinkToOrange" onClick={logout}>
                 Cerrar Sesión
               </Button>
             </div>
           </Modal.Body>
         </Modal>
       )}
-      {!isLoggedIn && (
-        <Modal show={showModal} onClose={() => setShowModal(false)} size="md">
+      {authError && (
+        <Modal show={!isLoggedIn} onClose={() => setError('')} size="md">
           <Modal.Header>Login Incorrecto</Modal.Header>
           <Modal.Body>
             <p>Tu sesión ha expirado o tus credenciales son incorrectas. Por favor, inicia sesión nuevamente.</p>
-            <Button onClick={() => setShowModal(false)}>Cerrar</Button>
+            <Button onClick={() => setError('')}>Cerrar</Button>
           </Modal.Body>
         </Modal>
       )}

@@ -4,6 +4,7 @@ import { IoSettings } from "react-icons/io5";
 import NavLinks from "../components/nav-links";
 import UserList from "../components/userList";
 import { useUser } from "../context/userContext";
+import { useTheme } from "../context/themeContext";
 import "../styles/dashboard.css";
 
 function DashboardUsers() {
@@ -16,6 +17,7 @@ function DashboardUsers() {
     rol: "Usuario",
   });
   const { createUser } = useUser();
+  
 
   const handleAddUser = async () => {
     try {
@@ -58,7 +60,7 @@ function DashboardUsers() {
         </div>
         <div className="main-dashboard-settings">
           <button
-            className="bg-green-900 w-48 h-12 rounded-xl"
+            className="bg-yellow-500 w-48 h-12 rounded-xl text-gray-900"
             onClick={() => setOpenAddUserModal(true)}
           >
             Agregar Usuario

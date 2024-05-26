@@ -11,7 +11,7 @@ function DashboardAssignment() {
             <div className="header-dashboard">
         
                 <div className="ico-dashboard"></div>
-                <h1>Dashboard</h1>
+                <h1>Asignaciones</h1>
                 <div className="settings-dashboard"><h1><IoSettings /></h1></div>
             </div>
             <div className="nav-dashboard">

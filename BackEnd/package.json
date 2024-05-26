@@ -6,10 +6,12 @@
     "cookie": "^0.6.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "csvtojson": "^2.0.10",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.6.2",
     "mysql2": "^3.9.7",
     "nodemon": "^3.1.0",
     "os": "^0.1.2"
