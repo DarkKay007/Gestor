@@ -1,16 +1,16 @@
 // Logout.jsx
 
-import React from 'react';
-import { unstable_HistoryRouter } from 'react-router-dom';
-import useUserStore from '../store/userStore'; // Asegúrate de que la ruta sea correcta
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import useUserStore from "../store/userStore"; // Asegúrate de que la ruta sea correcta
 
 const Logout = () => {
-  const history = unstable_HistoryRouter();
-  const logoutUser = useUserStore(state => state.logoutUser);
+  const navigate = useNavigate(); // Usa useNavigate en lugar de useHistory
+  const logoutUser = useUserStore((state) => state.logoutUser);
 
   const handleLogout = () => {
     logoutUser();
-    history.push('/'); // Redirige al home después de cerrar sesión
+    navigate("/"); // Redirige al home después de cerrar sesión
   };
 
   return (

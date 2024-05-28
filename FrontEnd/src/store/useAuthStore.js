@@ -1,5 +1,5 @@
 // src/store/useAuthStore.js
-import create from 'zustand';
+import {create} from 'zustand';
 
 const useAuthStore = create((set) => ({
   token: localStorage.getItem('token') || null,

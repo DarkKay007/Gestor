@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Modal, Button } from "flowbite-react";
 import { IoSettings } from "react-icons/io5";
 import NavLinks from "../components/nav-links";
-import UserList from "../components/UserList";
+import UserList from "../components/userList";
 import useUserStore from "../store/userStore";
 import "../styles/dashboard.css";
 
@@ -21,7 +21,7 @@ function DashboardUsers() {
   const handleAddUser = async () => {
     await createUser(newUser);
     setOpenAddUserModal(false);
-    fetchUserList(); // Actualiza la lista de usuarios después de agregar un nuevo usuario
+    fetchUserList(); 
   };
 
   return (

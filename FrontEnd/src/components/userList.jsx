@@ -1,6 +1,6 @@
 // src/components/UserList.jsx
 import React, { useEffect } from 'react';
-import { ProfileCard } from './ProfileCard';
+import { ProfileCard } from './profileCard';
 import useUserStore from '../store/userStore';
 
 const UserList = () => {
