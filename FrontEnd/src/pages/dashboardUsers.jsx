@@ -1,10 +1,10 @@
+// src/components/DashboardUsers.js
 import React, { useState } from "react";
-import { Modal, Button, Dropdown } from "flowbite-react";
+import { Modal, Button } from "flowbite-react";
 import { IoSettings } from "react-icons/io5";
 import NavLinks from "../components/nav-links";
-import UserList from "../components/userList";
-import { useUser } from "../context/userContext";
-import { useTheme } from "../context/themeContext";
+import UserList from "../components/UserList";
+import useUserStore from "../store/userStore";
 import "../styles/dashboard.css";
 
 function DashboardUsers() {
@@ -16,30 +16,12 @@ function DashboardUsers() {
     email: "",
     rol: "Usuario",
   });
-  const { createUser } = useUser();
-  
+  const { createUser, fetchUserList } = useUserStore();
 
   const handleAddUser = async () => {
-    try {
-      const response = await fetch("http://localhost:666/api/usuario", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al crear usuario");
-      }
-
-      const result = await response.json();
-      console.log(result.message);
-      setOpenAddUserModal(false);
-      // Lógica adicional para manejar la actualización del estado después de agregar un usuario
-    } catch (error) {
-      console.error(error.message);
-    }
+    await createUser(newUser);
+    setOpenAddUserModal(false);
+    fetchUserList(); // Actualiza la lista de usuarios después de agregar un nuevo usuario
   };
 
   return (
@@ -56,7 +38,6 @@ function DashboardUsers() {
         </div>
         <div className="nav-dashboard">
           <NavLinks />
-         
         </div>
         <div className="main-dashboard-settings">
           <button

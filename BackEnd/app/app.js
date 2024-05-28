@@ -1,30 +1,23 @@
-import express from 'express';
-import routes from './routes/index.js';
-import cors from 'cors';
+// app.js
+import express from "express";
+import cors from "cors";
+import pkg from "body-parser";
+import routes from "./routes/index.js";
+import { connect } from "./config/mongodb.js";
+
+const { json } = pkg;
 const app = express();
 
-app.use(cors({
-  origin: 'http://localhost:5173', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
-app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = await getUserByEmailAndPassword(email, password);
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-    const token = createToken(user);
-    res.json({ token });
-  } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-});
 
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+// Configurar CORS
+app.use(cors());
 
-app.use("/", routes);
+app.use(json());
+
+// Usar rutas definidas en el archivo de rutas
+app.use("/api", routes);
+
+// Conectar a la base de datos
+connect().catch(console.dir);
+
 export default app;

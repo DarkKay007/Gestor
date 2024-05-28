@@ -1,16 +1,23 @@
-import React from 'react';
-import { useUser } from '../context/userContext';
-import { ProfileCard } from './profilecard';
+// src/components/UserList.jsx
+import React, { useEffect } from 'react';
+import { ProfileCard } from './ProfileCard';
+import useUserStore from '../store/userStore';
 
 const UserList = () => {
-  const { userList,  } = useUser();
+  const { userList, fetchUserList, loading, error } = useUserStore();
+
+  useEffect(() => {
+    fetchUserList();
+  }, [fetchUserList]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
-    <div>
-      
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+    <div className="container mx-auto p-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {userList.map(user => (
-          <ProfileCard key={user.id} user={user} />
+          <ProfileCard key={user._id} user={user} />
         ))}
       </div>
     </div>

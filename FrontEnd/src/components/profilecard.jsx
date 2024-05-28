@@ -1,14 +1,14 @@
+// src/components/ProfileCard.js
 import React, { useState } from 'react';
 import { Card, Dropdown, Button, Modal } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { useUser } from '../context/userContext';
-
+import useUserStore from '../store/userStore';
 
 export function ProfileCard({ user }) {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openRoleModal, setOpenRoleModal] = useState(false);
   const [newRole, setNewRole] = useState(user.rol);
-  const { deleteUser, updateUser, createUser } = useUser();
+  const { deleteUser, updateUser } = useUserStore();
 
   const handleDelete = () => {
     deleteUser(user.id);
@@ -20,11 +20,9 @@ export function ProfileCard({ user }) {
     setOpenRoleModal(false);
   };
 
-
-
   return (
     <>
-      <Card className="w-80 h-64 bg-yellow-400 rounded-xl hover:bg-yellow-200">
+      <Card className="w-80 h-56 bg-yellow-400 rounded-xl hover:bg-yellow-200">
         <div className="flex justify-end px-20 pt-4 text-gray-900">
           <Dropdown inline label="">
             <Dropdown.Item onClick={() => setOpenRoleModal(true)}>
@@ -35,7 +33,7 @@ export function ProfileCard({ user }) {
             </Dropdown.Item>
           </Dropdown>
         </div>
-        <div className="w-3 h-3">ID:{user.id}</div>
+        
         <div className="flex flex-col items-center pb-10">
           <img
             alt={user.name}
@@ -54,8 +52,7 @@ export function ProfileCard({ user }) {
         </div>
       </Card>
 
-
-      <Modal show={openDeleteModal} size="md" className='' onClose={() => setOpenDeleteModal(false)} popup>
+      <Modal show={openDeleteModal} size="md" onClose={() => setOpenDeleteModal(false)} popup>
         <Modal.Header />
         <Modal.Body>
           <div className="text-center">
@@ -75,7 +72,6 @@ export function ProfileCard({ user }) {
         </Modal.Body>
       </Modal>
 
-      {/* Modal para Cambiar Rol */}
       <Modal show={openRoleModal} size="md" onClose={() => setOpenRoleModal(false)} popup>
         <Modal.Header />
         <Modal.Body>
@@ -99,8 +95,6 @@ export function ProfileCard({ user }) {
           </div>
         </Modal.Body>
       </Modal>
-
-    
     </>
   );
 }

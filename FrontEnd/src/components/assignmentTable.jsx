@@ -1,7 +1,7 @@
 // src/components/AssignmentTable.jsx
 import React, { useEffect, useState } from 'react';
 import useAssignmentStore from '../store/assignmentStore';
-import AssignmentForm from './AssignmentForm';
+import AssignmentForm from './assignmentForm';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 

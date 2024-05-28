@@ -6,4 +6,13 @@ export default defineConfig({
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:666', // Cambia al puerto donde se ejecuta tu servidor backend
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 });

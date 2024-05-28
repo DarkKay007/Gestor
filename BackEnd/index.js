@@ -1,11 +1,8 @@
 import app from "./app/app.js";
-import colors from "colors";
-import { config } from "dotenv";  
-
-config();
-
-let port = process.env.PORT;
-
-app.listen(port, ()=>{
-    console.log(`Server is running on port ${port}`.rainbow.italic);
+import dotenv from 'dotenv';
+dotenv.config();
+const port = process.env.PORT || 666;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
+console.log('JWT_SECRET:', process.env.JWT_SECRET);
