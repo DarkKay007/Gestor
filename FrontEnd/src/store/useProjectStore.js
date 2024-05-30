@@ -30,7 +30,7 @@ const useProjectStore = create(
           await axios.put(`http://localhost:666/api/projects/${id}`, project);
           set((state) => ({
             projects: state.projects.map((p) =>
-              p.ID === id ? { ...p, ...project } : p
+              p._id === id ? { ...p, ...project } : p
             ),
           }));
         } catch (error) {
@@ -42,7 +42,7 @@ const useProjectStore = create(
         try {
           await axios.delete(`http://localhost:666/api/projects/${id}`);
           set((state) => ({
-            projects: state.projects.filter((p) => p.ID !== id),
+            projects: state.projects.filter((p) => p._id !== id),
           }));
         } catch (error) {
           console.error('Error deleting project:', error);

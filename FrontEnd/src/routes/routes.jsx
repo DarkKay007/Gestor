@@ -9,7 +9,7 @@ import DashboardTask from '../pages/DashboardTask';
 import Page404 from '../pages/404';
 import DashboardAssignment from '../pages/dashboardAssignment';
 import Profile from '../pages/profile';
-import Logout from '../pages/logout';
+
 
 const AppRoutes = () => {
   return (
@@ -20,8 +20,8 @@ const AppRoutes = () => {
       <Route path="/dashboard/ProjectManagement" element={<DashboardProject />} />
       <Route path="/dashboard/Task" element={<DashboardTask />} />
       <Route path="/dashboard/Assignment" element={<DashboardAssignment />} />
-      <Route path="/profile" element={<Profile/>} />
-      <Route path="/logout" element={<Logout/>} />
+      
+      <Route path="/logout" element={<Profile/>} />
 
       <Route path="*" element={<Page404 />} />
     </Routes>

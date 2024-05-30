@@ -1,4 +1,4 @@
-import {create} from 'zustand';
+import { create } from 'zustand';
 import axios from 'axios';
 
 const useUserStore = create((set) => ({
@@ -28,27 +28,6 @@ const useUserStore = create((set) => ({
     } catch (error) {
       console.error('Error fetching UserList:', error);
       set({ error: "Error al obtener la lista de usuarios. Por favor, intenta de nuevo.", loading: false });
-    }
-  },
-
-  createUser: async (user) => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      set({ message: "Token no disponible. Por favor, inicia sesión." });
-      return;
-    }
-
-    try {
-      const response = await axios.post('http://localhost:666/api/users', user, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-      set((state) => ({ userList: [...state.userList, response.data], message: "Usuario creado con éxito" }));
-    } catch (error) {
-      console.error('Error creating user:', error);
-      set({ error: "Error al crear usuario. Por favor, intenta de nuevo." });
     }
   },
 
@@ -93,7 +72,7 @@ const useUserStore = create((set) => ({
       });
 
       set((state) => ({
-        userList: state.userList.filter(user => user.id !== id),
+        userList: state.userList.filter(user => user._id !== id),
         message: "Usuario eliminado con éxito"
       }));
     } catch (error) {
@@ -101,6 +80,7 @@ const useUserStore = create((set) => ({
       set({ error: "Error al eliminar usuario. Por favor, intenta de nuevo." });
     }
   },
+
 
   loginUser: async (user, password) => {
     try {

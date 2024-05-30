@@ -1,4 +1,3 @@
-// controllers/projectControllers.js
 import { collection as projectCollection, ObjectId } from '../models/projectModels.js';
 
 // Obtener todos los proyectos
@@ -34,8 +33,7 @@ const createProject = async (req, res) => {
 
   try {
     const result = await projectCollection.insertOne(projectData);
-    const newProject = result.ops[0];
-    res.status(201).json(newProject);
+    res.status(201).json(result.ops[0]);
   } catch (error) {
     console.error(`Error creating project: ${error}`);
     res.status(500).send('Internal Server Error');

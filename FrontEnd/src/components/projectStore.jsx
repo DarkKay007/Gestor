@@ -62,7 +62,7 @@ const ProjectComponent = () => {
     <div className="container mx-auto p-4">
 <ul className="projectList">
       {Array.isArray(currentProjects) && currentProjects.map((project) => (
-        <li key={project.ID} className="projectListUl bg-yellow-400">
+        <li key={project._id} className="projectListUl bg-yellow-400">
           <div>
             <h2 className="text-lg font-semibold text-white">{project.Nombre}</h2>
             <p className="text-gray-900">{project.Descripcion}</p>

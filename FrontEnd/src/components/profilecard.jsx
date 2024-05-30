@@ -11,12 +11,12 @@ export function ProfileCard({ user }) {
   const { deleteUser, updateUser } = useUserStore();
 
   const handleDelete = () => {
-    deleteUser(user.id);
+    deleteUser(user._id);
     setOpenDeleteModal(false);
   };
 
   const handleRoleChange = () => {
-    updateUser(user.id, { ...user, rol: newRole });
+    updateUser(user._id, { ...user, rol: newRole });
     setOpenRoleModal(false);
   };
 
