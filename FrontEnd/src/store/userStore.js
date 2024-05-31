@@ -30,6 +30,30 @@ const useUserStore = create((set) => ({
       set({ error: "Error al obtener la lista de usuarios. Por favor, intenta de nuevo.", loading: false });
     }
   },
+  createUser: async (userData) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      set({ message: "Token no disponible. Por favor, inicia sesión." });
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:666/api/users', userData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      set((state) => ({
+        userList: [...state.userList, response.data],
+        message: "Usuario creado con éxito"
+      }));
+    } catch (error) {
+      console.error('Error creating user:', error);
+      set({ error: "Error al crear usuario. Por favor, intenta de nuevo." });
+    }
+  },
 
   updateUser: async (id, updatedUser) => {
     const token = localStorage.getItem('token');

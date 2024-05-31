@@ -22,8 +22,8 @@ export function ProfileCard({ user }) {
 
   return (
     <>
-      <Card className="w-80 h-56 bg-yellow-400 rounded-xl hover:bg-yellow-200">
-        <div className="flex justify-end px-20 pt-4 text-gray-900">
+      <Card className="w-80 h-74 bg-yellow-400 rounded-xl hover:bg-yellow-200">
+        <Button className=" w-12 bg-yellow-700 text-gray-900">
           <Dropdown inline label="">
             <Dropdown.Item onClick={() => setOpenRoleModal(true)}>
               Cambiar Rol
@@ -32,7 +32,7 @@ export function ProfileCard({ user }) {
               Eliminar
             </Dropdown.Item>
           </Dropdown>
-        </div>
+        </Button>
         
         <div className="flex flex-col items-center pb-10">
           <img

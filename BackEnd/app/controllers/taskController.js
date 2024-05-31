@@ -40,7 +40,13 @@ const createTask = async (req, res) => {
       return res.status(404).send('Project not found');
     }
 
-    const result = await taskCollection.insertOne(taskData);
+    // Añadir la fecha de creación a los datos de la tarea
+    const taskWithDate = {
+      ...taskData,
+      date_create: new Date(),
+    };
+
+    const result = await taskCollection.insertOne(taskWithDate);
     const newTask = result.ops[0];
     res.status(201).json(newTask);
   } catch (error) {
@@ -48,7 +54,6 @@ const createTask = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
-
 // Actualizar una tarea
 const updateTask = async (req, res) => {
   const { id } = req.params;

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { addTask } from "../store/taskSlice";
+import useTaskStore from "../store/taskStore"; // Asegúrate de que la ruta sea correcta
 
 const TaskForm = () => {
-  const dispatch = useDispatch();
+  const { fetchProjects, addTask, proyectos } = useTaskStore();
   const [formData, setFormData] = useState({
-    ID: "", // Clave primaria
+    ID: "",
     ID_Proyecto: "",
     Nombre: "",
     Descripcion: "",
@@ -15,15 +14,10 @@ const TaskForm = () => {
   });
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [proyectos, setProyectos] = useState([]);
 
   useEffect(() => {
-  
-    fetch("http://localhost:666/api/projects") 
-      .then((response) => response.json())
-      .then((data) => setProyectos(data))
-      .catch((error) => console.error("Error fetching projects:", error));
-  }, []);
+    fetchProjects();
+  }, [fetchProjects]);
 
   const handleChange = (e) => {
     setFormData({
@@ -34,7 +28,7 @@ const TaskForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addTask(formData));
+    addTask(formData);
     setModalOpen(false);
   };
 
@@ -45,9 +39,8 @@ const TaskForm = () => {
   return (
     <>
       <button
-        
         onClick={toggleModal}
-        className="block text-gray-900 bg-yellow-500 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+        className="block text-gray-900 bg-yellow-500 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
       >
         Crear tarea
       </button>
@@ -60,9 +53,7 @@ const TaskForm = () => {
           className="fixed top-0 left-0 right-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50"
         >
           <div className="relative p-4 w-full max-w-md max-h-full">
-            {/* Modal content */}
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              {/* Modal header */}
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   Create New Task
@@ -90,7 +81,6 @@ const TaskForm = () => {
                   <span className="sr-only">Close modal</span>
                 </button>
               </div>
-              {/* Modal body */}
               <form className="p-4 md:p-5" onSubmit={handleSubmit}>
                 <div className="grid gap-4 mb-4 grid-cols-2">
                   <div className="col-span-2">
@@ -109,7 +99,7 @@ const TaskForm = () => {
                     >
                       <option value="">Seleccione un proyecto</option>
                       {proyectos.map((proyecto) => (
-                        <option key={proyecto.ID} value={proyecto.ID}>
+                        <option key={proyecto._id} value={proyecto._id}>
                           {proyecto.Nombre}
                         </option>
                       ))}

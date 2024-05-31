@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Button, Modal, TextInput, Label } from 'flowbite-react';
 import useProjectStore from '../store/useProjectStore';
 
-
 const ProjectComponent = () => {
   const { projects, fetchProjects, updateProject, deleteProject } = useProjectStore();
   const [currentPage, setCurrentPage] = useState(1);
-  const projectsPerPage = 9; // Número de proyectos por página
+  const projectsPerPage = 9; 
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -31,7 +30,8 @@ const ProjectComponent = () => {
   };
 
   const handleUpdateProject = () => {
-    updateProject(selectedProject.ID, selectedProject);
+    // Aquí podrías realizar una validación para asegurarte de que las fechas estén en el formato deseado
+    updateProject(selectedProject._id, selectedProject);
     handleCloseUpdateModal();
   };
 
@@ -46,7 +46,7 @@ const ProjectComponent = () => {
   };
 
   const handleDeleteProject = () => {
-    deleteProject(selectedProject.ID);
+    deleteProject(selectedProject._id);
     handleCloseDeleteModal();
   };
 
@@ -60,21 +60,26 @@ const ProjectComponent = () => {
 
   return (
     <div className="container mx-auto p-4">
-<ul className="projectList">
-      {Array.isArray(currentProjects) && currentProjects.map((project) => (
-        <li key={project._id} className="projectListUl bg-yellow-400">
-          <div>
-            <h2 className="text-lg font-semibold text-white">{project.Nombre}</h2>
-            <p className="text-gray-900">{project.Descripcion}</p>
-          </div>
-          <div>
-            <Button className='w-24' color="light" onClick={() => handleOpenUpdateModal(project)}>Update</Button>
-            <Button className='w-24' color="failure" onClick={() => handleOpenDeleteModal(project)}>Delete</Button>
-          </div>
-        </li>
-      ))}
-    </ul>
-      
+      <ul className="projectList">
+        {Array.isArray(currentProjects) &&
+          currentProjects.map((project) => (
+            <li key={project._id} className="projectListUl bg-yellow-400">
+              <div>
+                <h2 className="text-lg font-semibold text-white">{project.Nombre}</h2>
+                <p className="text-gray-900">{project.Descripcion}</p>
+              </div>
+              <div>
+                <Button className="w-24" color="light" onClick={() => handleOpenUpdateModal(project)}>
+                  Update
+                </Button>
+                <Button className="w-24" color="failure" onClick={() => handleOpenDeleteModal(project)}>
+                  Delete
+                </Button>
+              </div>
+            </li>
+          ))}
+      </ul>
+
       <div className="flex justify-between mt-4">
         <Button onClick={handlePreviousPage} disabled={currentPage === 1}>
           Previous
@@ -107,7 +112,7 @@ const ProjectComponent = () => {
               <Label className="text-white">Fecha Inicio</Label>
               <TextInput
                 type="date"
-                placeholder="FechaInicio"
+                placeholder="yyyy-MM-dd"
                 value={selectedProject?.FechaInicio}
                 onChange={(e) => setSelectedProject({ ...selectedProject, FechaInicio: e.target.value })}
                 color="dark"
@@ -115,7 +120,7 @@ const ProjectComponent = () => {
               <Label className="text-white">Fecha Fin</Label>
               <TextInput
                 type="date"
-                placeholder="FechaFin"
+                placeholder="yyyy-MM-dd"
                 value={selectedProject?.FechaFin}
                 onChange={(e) => setSelectedProject({ ...selectedProject, FechaFin: e.target.value })}
                 color="dark"
@@ -123,8 +128,12 @@ const ProjectComponent = () => {
             </div>
           </Modal.Body>
           <Modal.Footer className="bg-gray-900">
-            <Button onClick={handleUpdateProject} className="bg-yellow-500 text-black">Update</Button>
-            <Button onClick={handleCloseUpdateModal} color="gray">Cancel</Button>
+            <Button onClick={handleUpdateProject} className="bg-yellow-500 text-black">
+              Update
+            </Button>
+            <Button onClick={handleCloseUpdateModal} color="gray">
+              Cancel
+            </Button>
           </Modal.Footer>
         </Modal>
       )}
@@ -133,12 +142,22 @@ const ProjectComponent = () => {
         <Modal show={showDeleteModal} onClose={handleCloseDeleteModal}>
           <Modal.Header className="bg-gray-900 text-yellow-500">Delete Project</Modal.Header>
           <Modal.Body className="bg-gray-800 text-center">
-            <svg className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+            <svg
+              className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
-            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Estas seguro?</h3>
-            <Button onClick={handleDeleteProject} className="bg-red-600 hover:bg-red-800 text-white">Yes, I'm sure</Button>
-            <Button onClick={handleCloseDeleteModal} color="gray" className="ml-3">No, cancel</Button>
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure?</h3>
+            <Button onClick={handleDeleteProject} className="bg-red-600 hover:bg-red-800 text-white">
+              Yes, I'm sure
+            </Button>
+            <Button onClick={handleCloseDeleteModal} color="gray" className="ml-3">
+              No, cancel
+            </Button>
           </Modal.Body>
         </Modal>
       )}

@@ -6,7 +6,7 @@ import useUserStore from '../store/userStore';
 const UserList = () => {
   const { userList, fetchUserList, loading, error } = useUserStore();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 3;
 
   useEffect(() => {
     fetchUserList();
@@ -35,7 +35,7 @@ const UserList = () => {
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-4 py-2 mx-1 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300 disabled:opacity-50"
+          className="px-4 py-2 mx-1 bg-yellow-500 text-white rounded hover:bg-yellow-700 transition duration-300 disabled:opacity-50"
         >
           Previous
         </button>
@@ -44,8 +44,8 @@ const UserList = () => {
             key={index + 1}
             onClick={() => handlePageChange(index + 1)}
             className={`px-4 py-2 mx-1 ${
-              currentPage === index + 1 ? 'bg-blue-700' : 'bg-blue-500'
-            } text-white rounded hover:bg-blue-700 transition duration-300`}
+              currentPage === index + 1 ? 'bg-yellow-700' : 'bg-yellow-500'
+            } text-white rounded hover:bg-yellow-700 transition duration-300`}
           >
             {index + 1}
           </button>
@@ -53,7 +53,7 @@ const UserList = () => {
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-4 py-2 mx-1 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300 disabled:opacity-50"
+          className="px-4 py-2 mx-1 bg-yellow-500 text-white rounded hover:bg-yellow-700 transition duration-300 disabled:opacity-50"
         >
           Next
         </button>
